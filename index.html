@@ -1,0 +1,1417 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>English Journey</title>
+<meta name="theme-color" content="#1f4fa3">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap">
+<style>
+[hidden]{display:none!important}
+/* دفتر خط إنجليزي: ورق، حبر أزرق، سطر أحمر */
+:root{--bg:#f3f6f8;--card:#fff;--fg:#17263a;--mut:#56677d;--line:#d5dee8;--ink:#1f4fa3;--on:#fff;--rule:#9bbbe0;--base:#d9534f;--ok:#17724a;--okbg:#e0f3e9;--bad:#b3352f;--badbg:#fbe7e5;--soft:#e6eefb;
+--ar:"IBM Plex Sans Arabic","Noto Naskh Arabic",Tahoma,system-ui,sans-serif;--en:"Andika","Trebuchet MS",Verdana,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1723;--card:#182333;--fg:#e7eef7;--mut:#9fb0c6;--line:#2b3b52;--ink:#8ab4ff;--on:#0f1723;--rule:#38557d;--base:#e06c68;--ok:#6fd3a2;--okbg:#14372a;--bad:#ff9a93;--badbg:#40201f;--soft:#1f3150;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1723;--card:#182333;--fg:#e7eef7;--mut:#9fb0c6;--line:#2b3b52;--ink:#8ab4ff;--on:#0f1723;--rule:#38557d;--base:#e06c68;--ok:#6fd3a2;--okbg:#14372a;--bad:#ff9a93;--badbg:#40201f;--soft:#1f3150;color-scheme:dark}
+*{box-sizing:border-box}
+html{font-size:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:1rem/1.8 var(--ar)}
+#app{direction:rtl;text-align:right;max-width:42rem;margin:0 auto;padding-block:.75rem 5rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:1.5rem;margin:.4rem 0;line-height:1.5}h2{font-size:1.15rem;margin:1.2rem 0 .5rem}h3{font-size:1rem;margin:0}
+p{margin:.4rem 0}ul,ol{padding-inline-start:1.4rem}
+.en,bdi{font-family:var(--en);unicode-bidi:isolate}
+.en{direction:ltr;display:inline-block}
+.mut{color:var(--mut);font-size:.9rem}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.55rem .9rem;min-height:2.75rem}
+button:hover{border-color:var(--ink)}button:disabled{opacity:.45;cursor:default}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+button.pri{background:var(--ink);color:var(--on);border-color:var(--ink);font-weight:600}
+button.big{width:100%;font-size:1.3rem;padding:.9rem}
+button.danger{color:var(--bad);border-color:var(--bad)}
+input[type=text],textarea,select{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;max-width:100%}
+textarea{width:100%;min-height:5rem}
+.top{display:flex;gap:.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;border-bottom:2px solid var(--base);padding-bottom:.5rem;margin-bottom:.8rem}
+.brand{font-family:var(--en);direction:ltr;font-weight:700;color:var(--ink)}
+.sess{display:flex;gap:.4rem;align-items:center;font-variant-numeric:tabular-nums}
+.sess button{min-height:2.2rem;padding:.2rem .6rem;font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;margin:.6rem 0;min-width:0}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.row.between{justify-content:space-between}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
+.stat b{display:block;font-size:1.5rem;font-variant-numeric:tabular-nums;line-height:1.4}
+.bar{height:.6rem;background:var(--soft);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ink)}
+/* السطور الأربعة */
+.paper{direction:ltr;text-align:center;font-family:var(--en);font-size:5rem;line-height:8rem;height:8rem;white-space:nowrap;overflow:hidden;
+background:linear-gradient(var(--rule),var(--rule)) 0 22%/100% 1px no-repeat,repeating-linear-gradient(90deg,var(--rule) 0 6px,transparent 6px 12px) 0 46%/100% 1px no-repeat,linear-gradient(var(--base),var(--base)) 0 73%/100% 2px no-repeat,linear-gradient(var(--rule),var(--rule)) 0 93%/100% 1px no-repeat}
+.paper.word{font-size:3.2rem}
+.sent{direction:ltr;text-align:left;font-family:var(--en);font-size:1.45rem;line-height:1.7}
+.snd{min-width:2.75rem;padding:.3rem .6rem}
+.ex{display:flex;gap:.7rem;align-items:center;border-top:1px solid var(--line);padding-top:.5rem;margin-top:.5rem}
+.ex .pic{font-size:2.2rem}.ex>div{flex:1;min-width:0}
+.opts{display:grid;gap:.5rem;margin-top:.8rem}
+.opts button{font-size:1.15rem}
+button.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+button.no{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.fb{border-radius:12px;padding:.8rem;margin-top:.8rem}.fb.ok{background:var(--okbg)}.fb.no{background:var(--badbg)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;direction:ltr;min-height:3rem;margin:.5rem 0}
+.chips button{font-family:var(--en);font-size:1.2rem}
+.slot{border-bottom:2px solid var(--base)}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;direction:ltr}.pairs button{font-family:var(--en);font-size:1.5rem}
+button.sel{background:var(--soft);border-color:var(--ink)}
+canvas{width:100%;height:12rem;touch-action:none;border:1px dashed var(--line);border-radius:12px;display:block}
+.lesson{display:flex;justify-content:space-between;align-items:center;gap:.6rem;width:100%;text-align:right;margin:.35rem 0}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.4rem 1rem;margin:.5rem 0}
+summary{cursor:pointer;padding:.5rem 0;font-weight:600}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.92rem}td,th{border-bottom:1px solid var(--line);padding:.35rem;text-align:right}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20;direction:rtl}
+.modal>div{background:var(--card);border-radius:14px;padding:1.1rem;max-width:26rem;width:100%;max-height:90%;overflow:auto}
+.warn{border-color:var(--base)}
+label.set{display:flex;justify-content:space-between;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.6rem 0}
+
+#toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;right:16px;max-width:30rem;margin:auto;background:var(--fg);color:var(--bg);padding:.7rem 1rem;border-radius:10px;z-index:30;direction:rtl;text-align:center}
+</style>
+</head>
+<body>
+<div id="app" lang="ar" dir="rtl"></div>
+<div id="modal" class="modal" hidden></div>
+<div id="toast" role="status" hidden></div>
+<script>
+/* المنهج: المراحل 0-5. صيغة السطر: en|المعنى|النطق|مثال|ترجمة المثال */
+const STAGES=[
+{id:0,title:'التهيئة',sub:'كيف تتعلّم هنا'},
+{id:1,title:'الحروف',sub:'Alphabet — ٢٦ حرفاً'},
+{id:2,title:'أساسيات الأصوات',sub:'اسمع وميّز'},
+{id:3,title:'قراءة الكلمات البسيطة',sub:'Phonics — دمج الأصوات'},
+{id:4,title:'أنماط الحروف المتقدمة',sub:'حرفان بصوت واحد'},
+{id:5,title:'المقاطع والكلمات الطويلة',sub:'Syllables'},
+{id:6,title:'المفردات',sub:'كلمات حسب الموضوع'},
+{id:7,title:'الكلمات غير المنتظمة والإملاء',sub:'Spelling'},
+{id:8,title:'أساسيات القواعد',sub:'Grammar'},
+{id:9,title:'بناء الجمل والتعبير',sub:'تكلّم بجمل قصيرة'},
+{id:10,title:'القراءة والفهم',sub:'من الجملة إلى النص'},
+{id:11,title:'الترجمة',sub:'المعنى قبل الكلمة'},
+{id:12,title:'الإنجليزية العملية والمهنية',sub:'مسار اختياري'}
+];
+const LESSONS=[];
+const rows=s=>s.trim().split('\n').map(l=>l.trim().split('|'));
+function W(s){return rows(s).map(([en,ar,pr,ex,exar])=>({t:'w',en,ar,pr,ex,exar}))}
+function SN(s){return rows(s).map(([en,ar,pr])=>({t:'s',en,ar,pr}))}
+/* سؤال: النص|الصحيح|خطأ|خطأ|الشرح  — say: نص يُنطق قبل الإجابة */
+function Q(s){return rows(s).map(a=>({q:a[0],a:a[1],o:a.slice(2,-1),why:a[a.length-1]}))}
+function L(stage,id,title,intro,o){LESSONS.push(Object.assign({stage,id,title,intro,items:[],qs:[]},o||{}))}
+
+/* ---------- 0 ---------- */
+L(0,'start','طريقة التعلّم',
+`<p>أهلاً بك. سنبدأ من الصفر ولا نفترض أنك تعرف أي حرف.</p>
+<ol><li><b>تتعرّف</b> على شيء جديد قليل.</li><li><b>تسمع</b> نطقه بزر الصوت 🔊 وتكرّره بصوت عالٍ.</li><li><b>تتدرّب</b> وتُختبر. الخطأ عادي ويعود إليك لاحقاً.</li><li><b>تراجع</b> من زر «المراجعة» كل يوم.</li></ol>
+<p>يُفتح الدرس التالي عندما تجيب 80٪ من الأسئلة بشكل صحيح من أول محاولة. تستطيع الإعادة كما تشاء دون أي عقوبة.</p>
+<p>الإنجليزية تُكتب وتُقرأ <b>من اليسار إلى اليمين</b>، عكس العربية.</p>`,
+{qs:Q(`
+من أي جهة تُقرأ الإنجليزية؟|من اليسار إلى اليمين|من اليمين إلى اليسار|من الأعلى إلى الأسفل|الإنجليزية تبدأ من اليسار.
+ماذا يحدث إذا أخطأت في سؤال؟|يعود إليّ للمراجعة لاحقاً|يُحذف تقدّمي|ينتهي التعلّم|الخطأ يضيف العنصر إلى المراجعة فقط.
+ما الزر الذي تسمع به النطق؟|🔊|⏱️|⚙️|زر الصوت بجانب كل حرف وكلمة.`)});
+L(0,'namesound','اسم الحرف وصوته',
+`<p>لكل حرف إنجليزي شيئان مختلفان:</p>
+<ul><li><b>الاسم</b>: ما تقوله عند تهجئة الحروف. مثل: <bdi>C</bdi> اسمه «سي».</li><li><b>الصوت</b>: ما تسمعه داخل الكلمة. في <bdi>cat</bdi> صوت <bdi>C</bdi> هو «ك».</li></ul>
+<p>للقراءة نحتاج <b>الصوت</b>، وللتهجئة نحتاج <b>الاسم</b>. وبعض الحروف لها أكثر من صوت.</p>
+<p>الحروف المتحركة (Vowels) خمسة: <bdi>A E I O U</bdi>. والباقي حروف ساكنة (Consonants). والحرف <bdi>Y</bdi> أحياناً يعمل عمل المتحرك.</p>
+<p>أصوات ليست في العربية الفصحى نكتبها هكذا: <b>پ</b> (باء مهموسة)، <b>ڤ</b> (فاء مجهورة)، <b>گ</b> (جيم مصرية)، <b>چ</b> (تش). الكتابة العربية تقريب فقط، والمرجع هو الصوت.</p>`,
+{items:W(`
+cat|قطة|كَات
+city|مدينة|سِتي
+car|سيارة|كار`),qs:Q(`
+ما اسم الحرف C؟|سي|ك|تش|الاسم «سي»، والصوت في cat هو «ك».
+ما صوت الحرف C في كلمة cat؟|ك|سي|ج|هنا C يعطي صوت ك.
+كم عدد الحروف المتحركة الأساسية؟|5|26|10|هي A E I O U.`)});
+
+/* ---------- 1: الحروف ----------
+ الحرف|اسمه إنجليزياً|اسمه بالعربية|أصواته|كلمة:نطق:معنى:صورة ×2|ملاحظة */
+const LET={};
+rows(`
+A|ay|إيْ|«أَ» قصيرة مفتوحة مثل apple، أو «إيْ» مثل cake|apple:أَپِل:تفاحة:🍎|ant:أَنْت:نملة:🐜|اسمه «إيْ» لكن صوته في Apple «أَ».
+B|bee|بي|«ب»|ball:بول:كرة:⚽|bag:بَاگ:حقيبة:👜|دائرة b الصغيرة على اليمين.
+C|see|سي|«ك» غالباً، و«س» قبل e أو i أو y|cat:كَات:قطة:🐱|cup:كَپ:كوب:☕|في city يُنطق «س».
+D|dee|دي|«د»|dog:دوگ:كلب:🐶|door:دور:باب:🚪|دائرة d الصغيرة على اليسار، عكس b.
+E|ee|إي|«إِ» قصيرة مثل egg، أو «إي» طويلة مثل me|egg:إِگ:بيضة:🥚|elephant:إلِفَنْت:فيل:🐘|اسمه «إي» طويلة.
+F|eff|إِف|«ف»|fish:فِش:سمكة:🐟|fan:فَان:مروحة:🪭|
+G|jee|جي|«گ» غالباً، و«ج» أحياناً قبل e أو i|goat:گوت:ماعز:🐐|girl:گِيرل:بنت:👧|في giraffe يُنطق «ج».
+H|aitch|إيتْش|«هـ»|hat:هَات:قبعة:🎩|house:هاوس:بيت:🏠|أحياناً لا يُنطق: hour.
+I|eye|آيْ|«إِ» قصيرة مثل in، أو «آيْ» مثل bike|ink:إِنْك:حبر:🖋️|insect:إنْسِكت:حشرة:🐞|i الصغير له نقطة.
+J|jay|جيْ|«ج» معطّشة|juice:جوس:عصير:🧃|jam:جَام:مربّى:🍓|
+K|kay|كيْ|«ك»|key:كي:مفتاح:🔑|king:كِنْگ:ملك:🤴|لا يُنطق قبل n: knife.
+L|el|إِل|«ل»|lion:لايَن:أسد:🦁|lemon:لِمَن:ليمون:🍋|l الصغير خط مستقيم.
+M|em|إِم|«م»|moon:مون:قمر:🌙|milk:مِلْك:حليب:🥛|
+N|en|إِن|«ن»|nose:نوز:أنف:👃|nest:نِسْت:عُش:🪺|n لها قوس واحد و m قوسان.
+O|oh|أوْ|«أُ/آ» قصيرة مثل on، أو «أو» مثل home|orange:أورِنْج:برتقالة:🍊|octopus:أُكْتَپَس:أخطبوط:🐙|
+P|pee|پي|«پ» شفتان مع دفعة هواء|pen:پِن:قلم:🖊️|pizza:پيتْسا:بيتزا:🍕|ليس «ب». ضع ورقة أمام فمك فتتحرك.
+Q|cue|كيو|مع u غالباً: «كْو»|queen:كْوين:ملكة:👸|question:كْوِسْچَن:سؤال:❓|يأتي بعده u في الغالب.
+R|ar|آر|«ر» خفيفة بلا تكرار|rabbit:رَابِت:أرنب:🐰|rain:رين:مطر:🌧️|لا يلمس اللسان سقف الفم.
+S|ess|إِس|«س» وأحياناً «ز»|sun:سَن:شمس:☀️|star:سْتار:نجمة:⭐|في nose يُنطق «ز».
+T|tee|تي|«ت»|tree:تْري:شجرة:🌳|tiger:تايگَر:نمر:🐯|
+U|you|يو|«أَ» قصيرة مثل up، أو «يو» مثل cube|umbrella:أَمْبْرِلا:مظلة:☂️|up:أَپ:فوق:⬆️|
+V|vee|ڤي|«ڤ» الأسنان على الشفة مع اهتزاز|van:ڤان:شاحنة صغيرة:🚐|violin:ڤايَلِن:كمان:🎻|ليس «ف».
+W|double you|دَبْل يو|«و»|water:ووتَر:ماء:💧|window:وِنْدو:نافذة:🪟|
+X|ex|إِكْس|«كْس» وغالباً في آخر الكلمة|box:بوكْس:صندوق:📦|six:سِكْس:ستة:6️⃣|
+Y|why|واي|«ي»، وأحياناً حرف متحرك|yellow:يِلو:أصفر:🟡|yes:يِس:نعم:✅|في my يُنطق «آي».
+Z|zee|زي|«ز»|zebra:زيبرا:حمار وحشي:🦓|zero:زيرو:صفر:0️⃣|البريطانيون يسمّونه «زِد» (zed).
+`).forEach(([u,name,arn,snd,e1,e2,note])=>{
+ const ex=[e1,e2].map(e=>{const[w,pr,ar,pic]=e.split(':');return{w,pr,ar,pic}});
+ LET[u]={t:'l',en:u,low:u.toLowerCase(),name,arn,snd,ex,note};
+});
+[['abc','ABC'],['def','DEF'],['ghi','GHI'],['jkl','JKL'],['mno','MNO'],['pqr','PQR'],['stu','STU'],['vwx','VWX'],['yz','YZ']].forEach(([id,g])=>{
+ L(1,'l-'+id,'الحروف '+g.split('').join(' '),
+ `<p>تعلّم شكل كل حرف الكبير والصغير، واسمه، وصوته. اضغط 🔊 وكرّر بصوت عالٍ، ثم اكتبه بإصبعك على السطور.</p><p>الحرف الكبير يأتي في أول الجملة وأسماء الأشخاص والأماكن، والصغير في أغلب الكتابة.</p>`,
+ {items:g.split('').map(c=>LET[c])});
+});
+L(1,'l-review','مراجعة الحروف كلها','<p>اختبار شامل على الأبجدية: الأشكال والأسماء والأوائل. أعده حتى يصير سهلاً.</p>',{items:Object.values(LET),reviewOnly:true,count:20,
+qs:Q(`
+أي حرف يأتي بعد D؟|E|F|B|الترتيب: A B C D E.
+أي حرف يأتي قبل M؟|L|N|K|الترتيب: K L M N.
+ما آخر حرف في الأبجدية؟|Z|Y|X|الأبجدية من A إلى Z.`)});
+
+/* ---------- 2 ---------- */
+L(2,'p-first','الصوت الأول','<p>اسمع الكلمة وركّز على <b>أول صوت</b> فيها، لا على معناها.</p><p>مثال: <bdi>sun</bdi> تبدأ بصوت «س» أي الحرف <bdi>s</bdi>.</p>',
+{items:W(`
+sun|شمس|سَن
+map|خريطة|مَاپ
+fan|مروحة|فَان
+dog|كلب|دوگ`),qs:Q(`
+[say:map] ما الصوت الأول؟|m|p|a|map تبدأ بـ m.
+[say:fan] ما الصوت الأول؟|f|v|n|fan تبدأ بـ f.
+[say:dog] ما الصوت الأول؟|d|b|g|dog تبدأ بـ d.
+أي كلمة تبدأ بنفس صوت sun؟|sit|map|fan|sit و sun تبدآن بـ s.`)});
+L(2,'p-pairs','أصوات ساكنة متشابهة','<p>أزواج تخدع المتعلم العربي:</p><ul><li><bdi>p / b</bdi>: p مع دفعة هواء، و b باهتزاز.</li><li><bdi>f / v</bdi>: نفس وضع الفم، و v باهتزاز.</li><li><bdi>s / z</bdi> و <bdi>t / d</bdi>: الثاني باهتزاز الحنجرة.</li></ul>',
+{items:W(`
+pin|دبوس|پِن
+bin|سلة مهملات|بِن
+fan|مروحة|فَان
+van|شاحنة صغيرة|ڤان
+sip|رشفة|سِپ
+zip|سحّاب|زِپ
+ten|عشرة|تِن
+den|وكر|دِن`),qs:Q(`
+[say:pin] أي كلمة سمعت؟|pin|bin|pen|pin تبدأ بـ p مع هواء.
+[say:van] أي كلمة سمعت؟|van|fan|ran|v فيها اهتزاز.
+[say:zip] أي كلمة سمعت؟|zip|sip|tip|z مهتزة.
+[say:den] أي كلمة سمعت؟|den|ten|pen|d مهتزة.`)});
+L(2,'p-vowels','المتحركات القصيرة','<p>خمسة أصوات قصيرة:</p><ul><li><bdi>a</bdi> في cat: «أَ» مفتوحة.</li><li><bdi>e</bdi> في pen: «إِ» مفتوحة قليلاً.</li><li><bdi>i</bdi> في sit: «إِ» ضيقة سريعة.</li><li><bdi>o</bdi> في hot: «أُ» أو «آ» قصيرة.</li><li><bdi>u</bdi> في sun: «أَ» من وسط الفم.</li></ul>',
+{items:W(`
+bag|حقيبة|بَاگ
+beg|يتوسّل|بِگ (فتحة أوسع)
+big|كبير|بِگ
+bog|مستنقع|بوگ
+bug|حشرة|بَگ`),qs:Q(`
+[say:pen] أي حرف متحرك سمعت؟|e|a|u|pen فيها e قصيرة.
+[say:hot] أي حرف متحرك سمعت؟|o|i|e|hot فيها o.
+[say:sit] أي حرف متحرك سمعت؟|i|a|o|sit فيها i.
+[say:cap] أي كلمة سمعت؟|cap|cup|cop|cap فيها a.`)});
+L(2,'p-position','الأول والأوسط والأخير','<p>كلمة <bdi>cat</bdi> ثلاثة أصوات: <bdi>c</bdi> (أول)، <bdi>a</bdi> (أوسط)، <bdi>t</bdi> (أخير).</p>',
+{items:W(`
+cat|قطة|كَات
+bus|حافلة|بَس
+leg|رِجل|لِگ`),qs:Q(`
+[say:bus] ما الصوت الأخير؟|s|b|u|bus تنتهي بـ s.
+[say:leg] ما الصوت الأوسط؟|e|l|g|الوسط e.
+[say:cat] ما الصوت الأخير؟|t|c|a|cat تنتهي بـ t.
+كم صوتاً في dog؟|3|2|4|d - o - g.`)});
+L(2,'p-blend','تقسيم الأصوات ودمجها','<p>الدمج: قل الأصوات ببطء ثم أسرع حتى تلتصق: <bdi>s … u … n → sun</bdi>.</p><p>التقسيم عكسه. قل أصوات الكلمة واحداً واحداً. لا تضف حركة بعد الساكن: «سْ» وليس «سا».</p>',
+{items:W(`
+sun|شمس|سَن
+pig|خنزير|پِگ
+red|أحمر|رِد`),qs:Q(`
+s + u + n تصير؟|sun|sin|nus|ندمج بالترتيب من اليسار.
+p + i + g تصير؟|pig|big|peg|p ثم i ثم g.
+ما أصوات red؟|r - e - d|r - a - d|d - e - r|ثلاثة أصوات بالترتيب.
+m + a + n تصير؟|man|men|nam|الأوسط a.`)});
+L(2,'p-longshort','القصير والطويل','<p>المتحرك الطويل غالباً يُقرأ مثل <b>اسم الحرف</b>.</p><ul><li><bdi>hat</bdi> قصير ← <bdi>hate</bdi> طويل «هيْت».</li><li><bdi>ship</bdi> «إ» قصيرة ← <bdi>sheep</bdi> «إي» طويلة.</li></ul>',
+{items:W(`
+ship|سفينة|شِپ
+sheep|خروف|شيپ
+hop|يقفز|هوپ
+hope|أمل|هَوْپ`),qs:Q(`
+[say:sheep] أي كلمة سمعت؟|sheep|ship|shop|sheep صوتها طويل.
+[say:ship] أي كلمة سمعت؟|ship|sheep|shape|ship صوتها قصير.
+أي كلمة فيها صوت طويل؟|cake|cat|cap|a في cake تُنطق «إيْ».`)});
+
+/* ---------- 3: CVC ---------- */
+const cvc=(id,v,s,qs)=>L(3,'c-'+id,'كلمات بالصوت القصير '+v,
+`<p>كلمات من ثلاثة أحرف: ساكن + متحرك + ساكن (CVC). اقرأ <b>قبل</b> أن تضغط الصوت: قل كل صوت ثم ادمج.</p>`,{items:W(s),qs:qs?Q(qs):[],blend:true});
+cvc('a','a',`
+cat|قطة|كَات
+map|خريطة|مَاپ
+bag|حقيبة|بَاگ
+man|رجل|مَان
+hat|قبعة|هَات
+dad|أب|دَاد`);
+cvc('e','e',`
+pen|قلم|پِن
+bed|سرير|بِد
+red|أحمر|رِد
+ten|عشرة|تِن
+leg|رِجل|لِگ
+net|شبكة|نِت`);
+cvc('i','i',`
+sit|يجلس|سِت
+pig|خنزير|پِگ
+six|ستة|سِكْس
+big|كبير|بِگ
+lip|شفة|لِپ
+pin|دبوس|پِن`);
+cvc('o','o',`
+dog|كلب|دوگ
+box|صندوق|بوكْس
+hot|حار|هوت
+top|قمة|توپ
+pot|قِدر|پوت
+fox|ثعلب|فوكْس`);
+cvc('u','u',`
+sun|شمس|سَن
+bus|حافلة|بَس
+cup|كوب|كَپ
+run|يركض|رَن
+mud|طين|مَد
+nut|جوزة|نَت`);
+L(3,'c-family','أنماط متكررة','<p>إذا عرفت نهاية <bdi>-at</bdi> تقرأ: cat, hat, bat, rat. غيّر الحرف الأول فقط.</p>',
+{items:W(`
+bat|خفاش|بَات
+rat|جرذ|رَات
+can|علبة|كَان
+fan|مروحة|فَان
+hen|دجاجة|هِن
+pet|حيوان أليف|پِت`),blend:true,qs:Q(`
+r + at ؟|rat|ran|rot|نضع r قبل at.
+أي كلمة من عائلة -an؟|van|vat|vet|van تنتهي بـ an.
+أي كلمة لا تنتمي: hen, ten, pet ؟|pet|hen|ten|pet تنتهي بـ et.`)});
+L(3,'c-new','اقرأ كلمات جديدة','<p>هذه كلمات لم تدرسها. لا تخمّن: اقرأها صوتاً صوتاً. بعضها نادر، والهدف هو <b>القراءة</b>.</p>',
+{items:W(`
+jet|طائرة نفاثة|جِت
+log|جذع خشب|لوگ
+rug|سجادة صغيرة|رَگ
+zip|سحّاب|زِپ
+van|شاحنة صغيرة|ڤان
+web|شبكة العنكبوت|وِب`),blend:true,qs:Q(`
+[say:mop] اختر ما سمعت|mop|map|mob|mop بالصوت o.
+[say:tub] اختر ما سمعت|tub|tab|tube|tub قصيرة.
+[say:kid] اختر ما سمعت|kid|kit|bid|تنتهي بـ d.`)});
+
+/* ---------- 4 ---------- */
+const P=(id,t,intro,s,qs)=>L(4,id,t,intro,{items:W(s),qs:qs?Q(qs):[],blend:true});
+P('d-shch','sh و ch','<p><bdi>sh</bdi> = «ش»، و <bdi>ch</bdi> غالباً = «چ» (تش).</p><p>استثناءات: <bdi>ch</bdi> = «ك» في school، و«ش» في chef.</p>',`
+shop|دكان|شوپ
+fish|سمكة|فِش
+chair|كرسي|چير
+lunch|غداء|لَنْچ
+school|مدرسة|سْكول`,`
+ما صوت sh؟|ش|س|تش|sh صوت واحد: ش.
+ما صوت ch في school؟|ك|تش|ش|استثناء شائع.`);
+P('d-th','th و ph و wh','<p><bdi>th</bdi> لها صوتان: «ث» في think، و«ذ» في this. <bdi>ph</bdi> = «ف». <bdi>wh</bdi> غالباً = «و»، لكنها «هـ» في who.</p>',`
+think|يفكّر|ثِنْك
+this|هذا|ذِس
+three|ثلاثة|ثْري
+phone|هاتف|فون
+what|ماذا|وُت
+who|مَن|هو`,`
+أي كلمة فيها صوت «ذ»؟|this|think|three|this صوتها ذ.
+ما صوت ph؟|ف|پ|ب|phone = فون.
+كيف تُنطق who؟|هو|وو|وا|استثناء: wh هنا «هـ».`);
+P('d-blends','تجمعات ساكنة','<p>حرفان ساكنان متتاليان ونسمع <b>صوتيهما معاً</b>. لا تضع حركة بينهما ولا قبلهما: <bdi>stop</bdi> وليست «إستوب».</p>',`
+blue|أزرق|بْلو
+stop|قِف|سْتوپ
+tree|شجرة|تْري
+clock|ساعة حائط|كْلوك
+frog|ضفدع|فْروگ
+flag|علم|فْلاگ`,`
+b + l + ue ؟|blue|bule|glue|b ثم l.
+[say:stop] اختر ما سمعت|stop|top|shop|تبدأ بـ st.`);
+P('d-silent','حروف لا تُنطق','<p>بعض الحروف تُكتب ولا تُنطق. أشهرها: <bdi>k</bdi> قبل n، و <bdi>w</bdi> قبل r، و <bdi>b</bdi> بعد m، و <bdi>gh</bdi> في night. هذه أنماط شائعة ولها استثناءات.</p>',`
+knife|سكين|نايْف
+write|يكتب|رايْت
+lamb|حَمَل|لَام
+night|ليل|نايْت
+listen|يستمع|لِسَن
+hour|ساعة زمنية|آوَر`,`
+أي حرف صامت في knife؟|k|n|f|لا ننطق k.
+أي حرف صامت في listen؟|t|s|n|لا ننطق t.`);
+P('d-silente','قاعدة e الصامتة','<p>إذا انتهت الكلمة بـ «متحرك + ساكن + e»، فغالباً الـ e صامتة والمتحرك قبلها <b>يُقرأ باسمه</b>: cap ← cape.</p><p>استثناءات شائعة: <bdi>have, give, come, love</bdi>.</p>',`
+cake|كعكة|كيْك
+bike|دراجة|بايْك
+home|بيت|هوم
+cube|مكعب|كْيوب
+name|اسم|نيْم
+have|يملك (استثناء)|هَاڤ`,`
+hop + e ؟ كيف يصير صوت o؟|طويل «أو»|قصير|لا يُنطق|e تطيل ما قبلها.
+أي كلمة استثناء من القاعدة؟|have|cake|name|have تُقرأ a قصيرة.
+[say:kite] اختر ما سمعت|kite|kit|cat|i طويلة.`);
+P('d-vteam1','ai ay ee ea','<p><bdi>ai / ay</bdi> = «إيْ» (ai وسط الكلمة وay آخرها غالباً). <bdi>ee / ea</bdi> = «إي» طويلة.</p><p>استثناءات: bread و head تُقرأ ea «إِ»، و great «إيْ».</p>',`
+rain|مطر|رين
+day|يوم|ديْ
+tree|شجرة|تْري
+tea|شاي|تي
+read|يقرأ|ريد
+bread|خبز (استثناء)|بْرِد`,`
+ما صوت ee؟|إي طويلة|إيْ|آ|مثل tree.
+أي كلمة فيها ea بصوت «إِ»؟|bread|tea|read|استثناء شائع.`);
+P('d-vteam2','oa و oo','<p><bdi>oa</bdi> = «أو». <bdi>oo</bdi> لها صوتان: طويل في moon، وقصير في book.</p>',`
+boat|قارب|بوت
+road|طريق|رود
+moon|قمر|موون
+food|طعام|فوود
+book|كتاب|بُك
+good|جيد|گُد`,`
+أي كلمة فيها oo قصيرة؟|book|moon|food|book قصيرة.
+ما صوت oa في boat؟|أو|آ|إي|مثل boat.`);
+P('d-r','ar or er ir ur','<p>الحرف <bdi>r</bdi> يغيّر صوت ما قبله: <bdi>ar</bdi> «آر»، <bdi>or</bdi> «أور»، و <bdi>er, ir, ur</bdi> غالباً صوت واحد «ـَير». في النطق البريطاني تكاد r لا تُسمع هنا.</p>',`
+car|سيارة|كار
+fork|شوكة|فورك
+her|لها|هَر
+bird|طائر|بِيرد
+turn|يستدير|تيرن
+farm|مزرعة|فارم`,`
+أي كلمتين لهما نفس صوت المتحرك؟|bird و turn|car و fork|farm و her|ir و ur متشابهان.
+ما صوت ar في car؟|آر|أور|إير|ar = آر.`);
+P('d-diph','oi oy ou ow','<p><bdi>oi / oy</bdi> = «أوي». <bdi>ou / ow</bdi> غالباً «آو». لكن <bdi>ow</bdi> أحياناً «أو» كما في snow.</p>',`
+oil|زيت|أويْل
+boy|ولد|بوي
+house|بيت|هاوس
+cow|بقرة|كاو
+snow|ثلج|سْنو
+out|خارج|آوت`,`
+أي كلمة فيها ow بصوت «أو»؟|snow|cow|now|snow تنتهي بصوت أو.
+ما صوت oy؟|أوي|آو|إي|مثل boy.`);
+P('d-vary','صوت يتغير بالموقع','<p><bdi>c</bdi> قبل e,i,y = «س». <bdi>g</bdi> قبلها <b>أحياناً</b> «ج» (لكن get و girl بصوت «گ»). <bdi>y</bdi> أول الكلمة «ي»، وآخرها «آي» أو «إي».</p>',`
+ice|ثلج (جليد)|آيْس
+cent|سِنت|سِنْت
+giant|عملاق|جايَنْت
+get|يحصل|گِت
+my|لي (ملكي)|ماي
+happy|سعيد|هَاپي`,`
+ما صوت c في ice؟|س|ك|ش|قبل e.
+ما صوت g في get؟|گ|ج|غ|استثناء.
+ما صوت y في happy؟|إي|آي|ج|آخر كلمة من مقطعين.`);
+
+/* ---------- 5 ---------- */
+const M=(id,t,intro,s,qs)=>L(5,id,t,intro,{items:W(s),qs:qs?Q(qs):[]});
+M('m-syl','تقسيم المقاطع','<p>المقطع (Syllable) نبضة صوتية فيها صوت متحرك واحد: <bdi>rab-bit</bdi> مقطعان. غالباً نقسم بين ساكنين متتاليين.</p>',`
+rabbit|أرنب|رَاب-إِت
+window|نافذة|وِن-دو
+sister|أخت|سِس-تَر
+banana|موزة|بَ-نا-نا
+computer|حاسوب|كَم-پْيو-تَر`,`
+كم مقطعاً في window؟|2|1|3|win-dow.
+كم مقطعاً في banana؟|3|2|4|ba-na-na.
+كم مقطعاً في cake؟|1|2|3|e صامتة فلا تصنع مقطعاً.`);
+M('m-stress','المقطع المشدد','<p>في الكلمة الطويلة مقطع نقوله أقوى وأوضح (Stress). نكتبه هنا بين قوسين.</p>',`
+teacher|معلّم|(تي)-چَر
+hotel|فندق|هو-(تِل)
+doctor|طبيب|(دوك)-تَر
+machine|آلة|مَ-(شين)
+water|ماء|(وو)-تَر`,`
+أين التشديد في hotel؟|المقطع الثاني|المقطع الأول|لا يوجد|ho-TEL.
+أين التشديد في teacher؟|المقطع الأول|المقطع الثاني|الاثنان|TEA-cher.`);
+M('m-schwa','صوت Schwa','<p>المتحرك <b>غير المشدد</b> يضعف غالباً إلى صوت خافت يشبه «ـَ» سريعة، اسمه Schwa ورمزه <bdi>ə</bdi>. قد يكتب بأي حرف متحرك.</p>',`
+about|حَول|أَ-باوت
+sofa|أريكة|سو-فَ
+lemon|ليمون|لِ-مَن
+problem|مشكلة|پْروب-لَم
+today|اليوم|تَ-ديْ`,`
+أين الصوت الخافت في about؟|a الأولى|ou|t|المقطع الأول غير مشدد.
+صوت Schwa يأتي في المقطع…|غير المشدد|المشدد|الأخير دائماً|يظهر في المقاطع الضعيفة.`);
+M('m-compound','الكلمات المركّبة','<p>كلمتان تصيران كلمة: <bdi>sun + flower = sunflower</bdi>. اقرأ كل جزء وحده.</p>',`
+bedroom|غرفة نوم|بِد-روم
+sunflower|دوّار الشمس|سَن-فْلاوَر
+toothbrush|فرشاة أسنان|توث-بْرَش
+football|كرة قدم|فُت-بول
+notebook|دفتر|نوت-بُك`,`
+bed + room تعني؟|غرفة نوم|سرير صغير|حمّام|bed سرير، room غرفة.
+note + book تعني؟|دفتر|مكتبة|رسالة|كتاب للملاحظات.`);
+M('m-prefix','البادئات','<p>البادئة تأتي أول الكلمة وتغيّر المعنى: <bdi>un-</bdi> نفي، <bdi>re-</bdi> إعادة، <bdi>dis-</bdi> عكس، <bdi>pre-</bdi> قبل.</p>',`
+unhappy|غير سعيد|أَن-هَاپي
+unsafe|غير آمن|أَن-سيْف
+rewrite|يعيد الكتابة|ري-رايْت
+disconnect|يفصل|دِس-كَ-نِكْت
+preheat|يسخّن مسبقاً|پْري-هيت`,`
+ماذا تعني reopen؟|يفتح من جديد|يغلق|لم يُفتح|re = إعادة.
+unclear تعني؟|غير واضح|واضح جداً|يوضّح|un = نفي.`);
+M('m-suffix','اللواحق والجذور','<p>اللاحقة آخر الكلمة: <bdi>-er</bdi> الفاعل، <bdi>-ful</bdi> مملوء بـ، <bdi>-less</bdi> بدون، <bdi>-ly</bdi> بطريقة. الأصل الذي نضيف إليه هو <b>الجذر</b>.</p>',`
+worker|عامل|وير-كَر
+careful|حَذِر|كيْر-فُل
+careless|مهمل|كيْر-لِس
+slowly|ببطء|سْلو-لي
+helpful|مفيد|هِلْپ-فُل`,`
+ما جذر careful؟|care|ful|car|care عناية.
+useless تعني؟|عديم الفائدة|مفيد|يستعمل|less = بدون.
+driver تعني؟|سائق|قيادة|سيارة|er = من يقوم بالفعل.
+quickly تعني؟|بسرعة|سريع جداً|سرعة|ly = بطريقة.`);
+
+/* المراحل 6-12 */
+const V=(id,t,s,intro)=>L(6,id,t,intro||'<p>اقرأ الكلمة، اسمعها، ثم اقرأ الجملة. حاول تذكّر المعنى قبل النظر إليه.</p>',{items:W(s)});
+V('v-num','الأرقام',`
+one|واحد|وَن|I have one bag.|عندي حقيبة واحدة.
+two|اثنان|تو|I see two cats.|أرى قطتين.
+three|ثلاثة|ثْري|Three men are here.|ثلاثة رجال هنا.
+four|أربعة|فور|The car has four doors.|للسيارة أربعة أبواب.
+five|خمسة|فايْڤ|Give me five minutes.|أعطني خمس دقائق.
+six|ستة|سِكْس|I wake up at six.|أستيقظ الساعة السادسة.
+seven|سبعة|سِڤَن|A week has seven days.|في الأسبوع سبعة أيام.
+eight|ثمانية|إيْت|I work eight hours.|أعمل ثماني ساعات.
+nine|تسعة|نايْن|It is nine o'clock.|الساعة التاسعة.
+ten|عشرة|تِن|I have ten fingers.|لي عشر أصابع.`);
+V('v-num2','أرقام أكبر',`
+eleven|أحد عشر|إلِڤَن|He is eleven.|عمره أحد عشر عاماً.
+twelve|اثنا عشر|تْوِلْڤ|A year has twelve months.|في السنة اثنا عشر شهراً.
+thirteen|ثلاثة عشر|ثير-تين|Page thirteen, please.|الصفحة الثالثة عشرة من فضلك.
+twenty|عشرون|تْوِنْتي|The bus has twenty seats.|في الحافلة عشرون مقعداً.
+thirty|ثلاثون|ثير-تي|Wait thirty seconds.|انتظر ثلاثين ثانية.
+fifty|خمسون|فِفْتي|It costs fifty dollars.|ثمنه خمسون دولاراً.
+hundred|مئة|هَنْدْرِد|One hundred meters.|مئة متر.
+thousand|ألف|ثاوْزَنْد|A thousand thanks.|ألف شكر.`);
+V('v-color','الألوان',`
+red|أحمر|رِد|The apple is red.|التفاحة حمراء.
+blue|أزرق|بْلو|The sky is blue.|السماء زرقاء.
+green|أخضر|گْرين|The tree is green.|الشجرة خضراء.
+yellow|أصفر|يِلو|The sun looks yellow.|تبدو الشمس صفراء.
+black|أسود|بْلَاك|My bag is black.|حقيبتي سوداء.
+white|أبيض|وايْت|Milk is white.|الحليب أبيض.
+brown|بنّي|بْراون|The door is brown.|الباب بنّي.
+orange|برتقالي|أورِنْج|He has an orange helmet.|لديه خوذة برتقالية.`);
+V('v-days','أيام الأسبوع',`
+Saturday|السبت|سَاتَر-ديْ|I work on Saturday.|أعمل يوم السبت.
+Sunday|الأحد|سَن-ديْ|Sunday is a work day here.|الأحد يوم عمل هنا.
+Monday|الإثنين|مَن-ديْ|See you on Monday.|أراك يوم الإثنين.
+Tuesday|الثلاثاء|تْيوز-ديْ|The test is on Tuesday.|الاختبار يوم الثلاثاء.
+Wednesday|الأربعاء|وِنْز-ديْ|Today is Wednesday.|اليوم الأربعاء.
+Thursday|الخميس|ثيرز-ديْ|Come on Thursday.|تعال يوم الخميس.
+Friday|الجمعة|فْرايْ-ديْ|Friday is a holiday.|الجمعة عطلة.`);
+V('v-month','الأشهر',`
+January|كانون الثاني (1)|جَانْيو-إري|January is cold.|كانون الثاني بارد.
+February|شباط (2)|فِبْرو-إري|February is short.|شباط قصير.
+March|آذار (3)|مارْچ|Spring starts in March.|يبدأ الربيع في آذار.
+April|نيسان (4)|إيْپْرِل|I travel in April.|أسافر في نيسان.
+May|أيار (5)|ميْ|May is warm.|أيار دافئ.
+June|حزيران (6)|جون|School ends in June.|تنتهي المدرسة في حزيران.
+July|تموز (7)|جُ-لايْ|July is very hot.|تموز حار جداً.
+August|آب (8)|أوگَسْت|August is hot too.|آب حار أيضاً.
+September|أيلول (9)|سِپ-تِم-بَر|School starts in September.|تبدأ المدرسة في أيلول.
+October|تشرين الأول (10)|أوك-تو-بَر|October is nice.|تشرين الأول جميل.
+November|تشرين الثاني (11)|نو-ڤِم-بَر|It is November now.|نحن الآن في تشرين الثاني.
+December|كانون الأول (12)|دِ-سِم-بَر|December is the last month.|كانون الأول آخر شهر.`);
+V('v-family','الأشخاص والعائلة',`
+father|أب|فاذَر|My father is at home.|أبي في البيت.
+mother|أم|مَذَر|My mother cooks well.|أمي تطبخ جيداً.
+brother|أخ|بْرَذَر|I have a brother.|عندي أخ.
+sister|أخت|سِسْتَر|My sister is a student.|أختي طالبة.
+son|ابن|سَن|His son is five.|ابنه عمره خمس سنوات.
+daughter|ابنة|دوتَر|Her daughter is happy.|ابنتها سعيدة.
+wife|زوجة|وايْف|His wife is a doctor.|زوجته طبيبة.
+husband|زوج|هَزْبَنْد|Her husband is a driver.|زوجها سائق.
+friend|صديق|فْرِنْد|Ali is my friend.|علي صديقي.
+child|طفل|چايْلْد|The child is sleeping.|الطفل نائم.`);
+V('v-home','المنزل والأشياء اليومية',`
+room|غرفة|روم|The room is clean.|الغرفة نظيفة.
+kitchen|مطبخ|كِچِن|She is in the kitchen.|هي في المطبخ.
+bathroom|حمّام|باث-روم|Where is the bathroom?|أين الحمّام؟
+door|باب|دور|Close the door.|أغلق الباب.
+window|نافذة|وِنْدو|Open the window.|افتح النافذة.
+bed|سرير|بِد|The bed is big.|السرير كبير.
+chair|كرسي|چير|Sit on the chair.|اجلس على الكرسي.
+key|مفتاح|كي|I lost my key.|أضعت مفتاحي.
+light|ضوء|لايْت|Turn on the light.|شغّل الضوء.`);
+V('v-food','الطعام والشراب',`
+bread|خبز|بْرِد|I eat bread.|آكل الخبز.
+rice|رز|رايْس|We cook rice.|نطبخ الرز.
+meat|لحم|ميت|The meat is hot.|اللحم ساخن.
+chicken|دجاج|چِكِن|I like chicken.|أحب الدجاج.
+egg|بيضة|إِگ|I want one egg.|أريد بيضة واحدة.
+water|ماء|ووتَر|Drink water.|اشرب الماء.
+tea|شاي|تي|The tea is sweet.|الشاي حلو.
+milk|حليب|مِلْك|The baby drinks milk.|الرضيع يشرب الحليب.
+fruit|فاكهة|فْروت|Fruit is good.|الفاكهة مفيدة.
+salt|ملح|سولْت|Pass the salt, please.|ناولني الملح من فضلك.`);
+V('v-place','الأماكن والاتجاهات',`
+street|شارع|سْتْريت|The street is long.|الشارع طويل.
+market|سوق|مارْكِت|I go to the market.|أذهب إلى السوق.
+hospital|مستشفى|هوس-پِ-تَل|The hospital is near.|المستشفى قريب.
+bank|مصرف|بَانْك|The bank is closed.|المصرف مغلق.
+left|يسار|لِفْت|Turn left.|انعطف يساراً.
+right|يمين|رايْت|Turn right.|انعطف يميناً.
+straight|مستقيم|سْتْريْت|Go straight.|امشِ مستقيماً.
+near|قريب|نِيَر|My work is near my home.|عملي قريب من بيتي.
+far|بعيد|فار|The airport is far.|المطار بعيد.`);
+V('v-time','الوقت والتاريخ',`
+time|وقت|تايْم|What time is it?|كم الساعة؟
+hour|ساعة|آوَر|I wait one hour.|أنتظر ساعة.
+minute|دقيقة|مِنِت|Wait a minute.|انتظر دقيقة.
+today|اليوم|تَديْ|Today is hot.|اليوم حار.
+tomorrow|غداً|تَمورو|See you tomorrow.|أراك غداً.
+yesterday|أمس|يِسْتَرديْ|I worked yesterday.|عملت أمس.
+morning|صباح|مورْنِنْگ|Good morning.|صباح الخير.
+evening|مساء|إيڤْنِنْگ|Good evening.|مساء الخير.
+week|أسبوع|ويك|I rest once a week.|أرتاح مرة في الأسبوع.
+year|سنة|يِيَر|Happy new year.|سنة جديدة سعيدة.`);
+V('v-study','الدراسة والتعليم',`
+school|مدرسة|سْكول|The school is big.|المدرسة كبيرة.
+teacher|معلّم|تيچَر|The teacher is kind.|المعلم لطيف.
+student|طالب|سْتْيودَنْت|I am a student.|أنا طالب.
+lesson|درس|لِسَن|This lesson is easy.|هذا الدرس سهل.
+word|كلمة|ويرْد|Read the word.|اقرأ الكلمة.
+question|سؤال|كْوِسْچَن|I have a question.|عندي سؤال.
+answer|جواب|آنْسَر|Write the answer.|اكتب الجواب.
+test|اختبار|تِسْت|The test is short.|الاختبار قصير.
+learn|يتعلّم|ليرْن|I learn English.|أتعلم الإنجليزية.`);
+V('v-work','العمل والمهن',`
+job|وظيفة|جوب|I like my job.|أحب عملي.
+engineer|مهندس|إنْجِنِيَر|The engineer checks the plan.|المهندس يدقق المخطط.
+driver|سائق|دْرايْڤَر|The driver is careful.|السائق حَذِر.
+operator|مشغّل|أوپَريْتَر|The operator starts the machine.|المشغّل يشغّل الآلة.
+worker|عامل|ويرْكَر|The worker wears a helmet.|العامل يلبس خوذة.
+manager|مدير|مَانِجَر|Call the manager.|اتصل بالمدير.
+office|مكتب|أوفِس|He is in the office.|هو في المكتب.
+salary|راتب|سَالَري|The salary is good.|الراتب جيد.`);
+V('v-body','الجسم والصحة',`
+head|رأس|هِد|Protect your head.|احمِ رأسك.
+eye|عين|آيْ|My eye hurts.|عيني تؤلمني.
+hand|يد|هَانْد|Wash your hands.|اغسل يديك.
+foot|قدم|فُت|My foot is cold.|قدمي باردة.
+back|ظهر|بَاك|My back hurts.|ظهري يؤلمني.
+doctor|طبيب|دوكْتَر|I need a doctor.|أحتاج طبيباً.
+sick|مريض|سِك|I am sick today.|أنا مريض اليوم.
+medicine|دواء|مِدْسِن|Take your medicine.|تناول دواءك.
+pain|ألم|پيْن|Where is the pain?|أين الألم؟`);
+V('v-tech','التكنولوجيا والأجهزة',`
+phone|هاتف|فون|My phone is new.|هاتفي جديد.
+screen|شاشة|سْكْرين|The screen is small.|الشاشة صغيرة.
+button|زر|بَتَن|Press the button.|اضغط الزر.
+battery|بطارية|بَاتَري|The battery is low.|البطارية ضعيفة.
+charger|شاحن|چارْجَر|Where is my charger?|أين شاحني؟
+internet|إنترنت|إنْتَرْنِت|There is no internet.|لا يوجد إنترنت.
+password|كلمة السر|پاسْويرْد|Change your password.|غيّر كلمة السر.
+save|يحفظ|سيْڤ|Save the file.|احفظ الملف.`);
+V('v-travel','السفر والمواصلات',`
+car|سيارة|كار|My car is white.|سيارتي بيضاء.
+bus|حافلة|بَس|I take the bus.|أركب الحافلة.
+train|قطار|تْريْن|The train is late.|القطار متأخر.
+plane|طائرة|پْليْن|The plane is big.|الطائرة كبيرة.
+airport|مطار|إيرْپورْت|We are at the airport.|نحن في المطار.
+ticket|تذكرة|تِكِت|I need a ticket.|أحتاج تذكرة.
+passport|جواز سفر|پاسْپورْت|Show your passport.|أظهر جواز سفرك.
+road|طريق|رود|The road is closed.|الطريق مغلق.`);
+V('v-verbs','أكثر الأفعال شيوعاً',`
+go|يذهب|گو|I go to work.|أذهب إلى العمل.
+come|يأتي|كَم|Come here.|تعال إلى هنا.
+eat|يأكل|إيت|We eat at two.|نأكل الساعة الثانية.
+drink|يشرب|دْرِنْك|I drink tea.|أشرب الشاي.
+see|يرى|سي|I see a car.|أرى سيارة.
+make|يصنع|ميْك|I make tea.|أعدّ الشاي.
+take|يأخذ|تيْك|Take this key.|خذ هذا المفتاح.
+give|يعطي|گِڤ|Give me the pen.|أعطني القلم.
+want|يريد|وُنْت|I want water.|أريد ماءً.
+know|يعرف|نو|I know him.|أنا أعرفه.
+help|يساعد|هِلْپ|Can you help me?|هل تستطيع مساعدتي؟
+sleep|ينام|سْليپ|I sleep early.|أنام مبكراً.`);
+
+/* ---------- 7 ---------- */
+const E=(id,t,intro,s,qs,o)=>L(7,id,t,intro,Object.assign({items:W(s),qs:qs?Q(qs):[]},o));
+E('s-sight1','كلمات تُحفظ بشكلها (1)','<p>كلمات شائعة جداً لا تطابق قواعد القراءة تماماً. احفظ <b>شكلها</b> ونطقها.</p>',`
+the|ال التعريف|ذَ|The door is open.|الباب مفتوح.
+of|من / لـ|أَڤ|A cup of tea.|كوب من الشاي.
+to|إلى|تو|I go to school.|أذهب إلى المدرسة.
+you|أنت|يو|You are kind.|أنت لطيف.
+was|كان|وُز|He was here.|كان هنا.
+are|تكون (للجمع وأنت)|آر|They are busy.|هم مشغولون.`,null,{spell:true});
+E('s-sight2','كلمات تُحفظ بشكلها (2)','<p>انظر إلى الكلمة، أغمض عينيك وتهجّاها بأسماء الحروف.</p>',`
+said|قال|سِد|He said yes.|قال نعم.
+one|واحد|وَن|One minute.|دقيقة واحدة.
+come|يأتي|كَم|Come in.|ادخل.
+two|اثنان|تو|Two keys.|مفتاحان.
+what|ماذا|وُت|What is this?|ما هذا؟
+there|هناك|ذير|The bag is there.|الحقيبة هناك.
+people|ناس|پيپَل|Many people work here.|يعمل هنا أناس كثيرون.
+friend|صديق|فْرِنْد|My friend is here.|صديقي هنا.`,null,{spell:true});
+E('s-spell','اكتب ما تسمع','<p>اسمع الكلمة ثم رتّب حروفها أو اكتبها. قسّمها إلى أصوات قبل الكتابة.</p>',`
+house|بيت|هاوس
+green|أخضر|گْرين
+water|ماء|ووتَر
+school|مدرسة|سْكول
+night|ليل|نايْت
+phone|هاتف|فون`,null,{spell:true});
+E('s-confuse','كلمات متشابهة','<p>بعض الكلمات تُنطق متشابهة وتختلف كتابة ومعنى: <bdi>to / two / too</bdi>، <bdi>there / their</bdi>.</p>',`
+too|أيضاً / أكثر من اللازم|تو|It is too hot.|الجو حار أكثر من اللازم.
+their|لهم|ذير|Their car is new.|سيارتهم جديدة.
+here|هنا|هِيَر|Come here.|تعال هنا.
+hear|يسمع|هِيَر|I hear you.|أسمعك.
+quiet|هادئ|كْوايَت|The room is quiet.|الغرفة هادئة.
+quite|تماماً / إلى حد كبير|كْوايْت|It is quite big.|إنه كبير نوعاً ما.`,`
+I have ___ brothers.|two|to|too|two = اثنان.
+I go ___ work.|to|two|too|to = إلى.
+___ house is big. (بيتهم)|Their|There|They|their للملكية.
+I can ___ the music.|hear|here|her|hear = يسمع.`);
+E('s-punct','علامات الترقيم','<p><bdi>.</bdi> نهاية الجملة، <bdi>?</bdi> سؤال، <bdi>!</bdi> تعجّب، <bdi>,</bdi> وقفة قصيرة، <bdi>\'</bdi> للملكية أو الاختصار. وتبدأ الجملة بحرف كبير، والضمير <bdi>I</bdi> كبير دائماً.</p>',`
+don't|لا (اختصار do not)|دونْت|I don't know.|لا أعرف.
+it's|إنه (it is)|إِتْس|It's late.|الوقت متأخر.`,`
+أي جملة صحيحة؟|I am Ali.|i am Ali.|I am ali.|I كبير والاسم يبدأ بحرف كبير.
+What is your name__|?|.|!|هو سؤال.
+Ali__s car|'|,|.|الفاصلة العليا للملكية.`);
+E('s-mistakes','أخطاء إملائية شائعة','<p>قاعدة مفيدة: <bdi>i</bdi> قبل <bdi>e</bdi> إلا بعد <bdi>c</bdi> (ولها استثناءات). وقبل إضافة <bdi>-ing</bdi> نحذف e الصامتة، ونضاعف الساكن في مثل run.</p>',`
+because|لأن|بِكوز
+beautiful|جميل|بْيوتِفُل
+receive|يستلم|رِسيڤ
+writing|كتابة|رايْتِنْگ
+running|ركض|رَنِنْگ
+different|مختلف|دِفْرَنْت`,`
+اختر الصحيح|because|becaus|becose|تنتهي بـ ause.
+write + ing|writing|writeing|writting|نحذف e.
+run + ing|running|runing|runeing|نضاعف n.
+اختر الصحيح|receive|recieve|receve|بعد c نكتب ei.`,{spell:true});
+
+/* ---------- 8 ---------- */
+const G=(id,t,intro,s,qs)=>L(8,id,t,intro,{items:SN(s),qs:Q(qs)});
+G('g-noun','الأسماء والمفرد والجمع','<p>الاسم (Noun) يدل على شخص أو شيء أو مكان. للجمع نضيف غالباً <bdi>s</bdi>، وبعد s, x, ch, sh نضيف <bdi>es</bdi>. وهناك شواذ: man ← men، child ← children.</p>',`
+one car, two cars|سيارة، سيارتان|وَن كار، تو كارْز
+one box, two boxes|صندوق، صندوقان|وَن بوكْس، تو بوكْسِز
+one child, three children|طفل، ثلاثة أطفال|`,`
+جمع book|books|bookes|bookies|نضيف s.
+جمع box|boxes|boxs|boxen|بعد x نضيف es.
+جمع man|men|mans|manes|شاذ.
+أي كلمة اسم؟|door|run|big|door شيء.`);
+G('g-pron','الضمائر','<p><bdi>I</bdi> أنا، <bdi>you</bdi> أنت/أنتم، <bdi>he</bdi> هو، <bdi>she</bdi> هي، <bdi>it</bdi> لغير العاقل، <bdi>we</bdi> نحن، <bdi>they</bdi> هم. وبعد الفعل: me, you, him, her, it, us, them.</p>',`
+He is here.|هو هنا.|هي إِز هِيَر
+She helps me.|هي تساعدني.|شي هِلْپْس مي
+We see them.|نحن نراهم.|وي سي ذِم`,`
+الضمير المناسب لـ Ali|he|she|it|مذكر عاقل.
+الضمير لـ the car|it|he|she|غير عاقل.
+Help ___. (ساعدني)|me|I|my|بعد الفعل نستعمل me.`);
+G('g-be','فعل be','<p>في العربية نقول «أنا طالب» بلا فعل، لكن الإنجليزية تحتاج <bdi>am / is / are</bdi>: I <b>am</b>، he/she/it <b>is</b>، you/we/they <b>are</b>. النفي بإضافة not، والسؤال بتقديم الفعل.</p>',`
+I am a student.|أنا طالب.|آي أَم أَ سْتْيودَنْت
+She is not busy.|هي ليست مشغولة.|
+Are you ready?|هل أنت جاهز؟|آر يو رِدي`,`
+I ___ happy.|am|is|are|مع I نستعمل am.
+They ___ here.|are|is|am|مع الجمع are.
+He ___ a driver.|is|are|am|مع he نستعمل is.
+صحّح: She are sick.|She is sick.|She am sick.|She sick.|she تأخذ is.`);
+G('g-art','a و an و the','<p><bdi>a</bdi> قبل مفرد يبدأ <b>بصوت</b> ساكن، و <bdi>an</bdi> قبل صوت متحرك. <bdi>the</bdi> لشيء محدد معروف. مثال خاص: an hour لأن h صامتة.</p>',`
+a book|كتاب|أَ بُك
+an apple|تفاحة|أَن أَپِل
+the sun|الشمس|ذَ سَن`,`
+___ egg|an|a|بلا أداة|تبدأ بصوت متحرك.
+___ car|a|an|بلا أداة|صوت ساكن.
+___ hour|an|a|بلا أداة|h صامتة.
+Close ___ door. (باب معروف)|the|a|an|محدد.`);
+G('g-adj','الصفات','<p>الصفة (Adjective) تأتي <b>قبل</b> الاسم، عكس العربية: a big house. ولا تُجمع.</p>',`
+a big house|بيت كبير|أَ بِگ هاوس
+two red cars|سيارتان حمراوان|تو رِد كارْز
+The water is cold.|الماء بارد.|`,`
+«قلم أزرق»|a blue pen|a pen blue|blue a pen|الصفة قبل الاسم.
+أي جملة صحيحة؟|three small boys|three smalls boys|three boys small|الصفة لا تُجمع.`);
+G('g-adv','الظروف','<p>الظرف (Adverb) يصف الفعل: كيف أو متى أو كم مرة. كثير منها ينتهي بـ <bdi>-ly</bdi>. تكرار: always دائماً، usually عادة، sometimes أحياناً، never أبداً.</p>',`
+He drives slowly.|يقود ببطء.|
+I always wake up early.|أستيقظ مبكراً دائماً.|
+She speaks quietly.|تتكلم بهدوء.|`,`
+He walks ___. (بسرعة)|quickly|quick|quickness|نصف الفعل بظرف.
+never تعني|أبداً|دائماً|أحياناً|نفي التكرار.
+أين تأتي always؟|I always work.|I work always the.|Always I the work.|قبل الفعل الرئيسي.`);
+G('g-prep','حروف الجر','<p><bdi>in</bdi> داخل، <bdi>on</bdi> فوق ملامساً، <bdi>under</bdi> تحت، <bdi>at</bdi> عند، <bdi>behind</bdi> خلف، <bdi>next to</bdi> بجانب. للوقت: at 5، on Friday، in May.</p>',`
+The key is in the bag.|المفتاح في الحقيبة.|
+The cup is on the table.|الكوب على الطاولة.|
+The cat is under the car.|القطة تحت السيارة.|`,`
+I work ___ Sunday.|on|in|at|مع الأيام on.
+Come ___ five o'clock.|at|on|in|مع الساعة at.
+My birthday is ___ May.|in|on|at|مع الأشهر in.
+behind تعني|خلف|أمام|فوق|behind = وراء.`);
+G('g-order','ترتيب الجملة','<p>الترتيب الأساسي: <b>فاعل + فعل + مفعول</b> (S V O)، ثم المكان ثم الزمان غالباً.</p>',`
+Ali reads a book.|علي يقرأ كتاباً.|
+I drink tea at home.|أشرب الشاي في البيت.|
+We play football on Friday.|نلعب كرة القدم يوم الجمعة.|`,`
+رتّب: «يأكل أحمد تفاحة»|Ahmed eats an apple.|Eats Ahmed an apple.|Ahmed an apple eats.|الفاعل أولاً.
+أي ترتيب صحيح؟|I work here today.|I here work today.|Work I today here.|فعل بعد الفاعل.`);
+G('g-have','فعل have','<p>للملكية: I/you/we/they <bdi>have</bdi>، و he/she/it <bdi>has</bdi>. النفي: don\'t have / doesn\'t have.</p>',`
+I have a car.|عندي سيارة.|
+He has two sisters.|عنده أختان.|
+She doesn't have a key.|ليس عندها مفتاح.|`,`
+She ___ a phone.|has|have|having|مع she نستعمل has.
+We ___ time.|have|has|is|مع we نستعمل have.
+He doesn't ___ money.|have|has|had|بعد doesn't الفعل مجرد.`);
+G('g-poss','الملكية','<p>my لي، your لك، his له، her لها، our لنا، their لهم. ومع الأسماء نضيف <bdi>\'s</bdi>: Ali\'s book.</p>',`
+This is my bag.|هذه حقيبتي.|
+Her name is Sara.|اسمها سارة.|
+Ali's car is old.|سيارة علي قديمة.|`,`
+«كتابه»|his book|her book|he book|his للمذكر.
+«بيتنا»|our house|we house|us house|our لنا.
+«هاتف سارة»|Sara's phone|Sara phone's|phone Sara|نضيف 's للمالك.`);
+G('g-ps','المضارع البسيط','<p>للعادات والحقائق. مع he/she/it نضيف <bdi>s</bdi> للفعل: He work<b>s</b>.</p>',`
+I work every day.|أعمل كل يوم.|
+He works in Baghdad.|يعمل في بغداد.|
+The sun rises in the east.|تشرق الشمس من الشرق.|`,`
+She ___ tea.|drinks|drink|drinking|إضافة s.
+They ___ football.|play|plays|playing|الجمع بلا s.
+صحّح: He go to work.|He goes to work.|He going to work.|He go work.|go ← goes.`);
+G('g-aux','الأفعال المساعدة','<p><bdi>do / does / did</bdi> للسؤال والنفي. <bdi>can</bdi> يستطيع، <bdi>must</bdi> يجب، <bdi>should</bdi> ينبغي. بعدها الفعل مجرداً.</p>',`
+I can read.|أستطيع القراءة.|
+You must stop.|يجب أن تتوقف.|
+You should rest.|ينبغي أن ترتاح.|`,`
+He can ___ English.|speak|speaks|speaking|بعد can مجرد.
+«يجب»|must|can|may|must للإلزام.
+___ she work here?|Does|Do|Is|مع she نستعمل does.`);
+G('g-neg','السؤال والنفي','<p>النفي: <bdi>don\'t / doesn\'t</bdi> + الفعل. السؤال: <bdi>Do / Does</bdi> + الفاعل + الفعل. مع be لا نحتاج do.</p>',`
+I don't smoke.|لا أدخّن.|
+Does he drive?|هل يقود؟|
+Is it hot?|هل الجو حار؟|`,`
+انفِ: She likes rice.|She doesn't like rice.|She don't likes rice.|She not like rice.|doesn't ثم الفعل بلا s.
+___ you speak Arabic?|Do|Does|Are|مع you نستعمل do.
+___ you tired?|Are|Do|Does|مع الصفة نستعمل be.`);
+G('g-wh','أدوات السؤال','<p>what ماذا، where أين، when متى، why لماذا، who من، how كيف، how many كم عدداً، how much كم مقداراً أو سعراً.</p>',`
+Where are you?|أين أنت؟|
+What is your name?|ما اسمك؟|
+How much is this?|بكم هذا؟|`,`
+___ do you live?|Where|Who|How many|للمكان.
+___ is that man?|Who|Where|When|للشخص.
+___ cars do you see?|How many|How much|Why|للمعدود.
+Answer: Why are you late?|Because the road is closed.|At five.|In the car.|why جوابه because.`);
+G('g-pc','المضارع المستمر','<p>لما يحدث <b>الآن</b>: am/is/are + فعل + <bdi>ing</bdi>.</p>',`
+I am reading now.|أنا أقرأ الآن.|
+He is driving.|هو يقود الآن.|
+They are working.|هم يعملون الآن.|`,`
+She ___ cooking now.|is|are|does|is مع she.
+We are ___ now.|eating|eat|eats|نضيف ing.
+أي جملة تدل على الآن؟|I am studying.|I study every day.|I studied.|المستمر.`);
+G('g-past','الماضي البسيط','<p>الأفعال المنتظمة + <bdi>ed</bdi>. الشاذة تُحفظ: go ← went، eat ← ate، see ← saw. و be: was/were. النفي والسؤال بـ did والفعل مجرد.</p>',`
+I worked yesterday.|عملت أمس.|
+She went home.|ذهبت إلى البيت.|
+Did you eat?|هل أكلت؟|`,`
+ماضي play|played|plaid|playd|منتظم.
+ماضي go|went|goed|gone|شاذ.
+I didn't ___ him.|see|saw|seen|بعد didn't مجرد.
+They ___ happy.|were|was|are did|مع الجمع were.`);
+G('g-fut','المستقبل البسيط','<p><bdi>will</bdi> + الفعل: قرار أو توقع. و <bdi>am/is/are going to</bdi> + الفعل: خطة.</p>',`
+I will call you.|سأتصل بك.|
+It will be hot.|سيكون الجو حاراً.|
+I am going to travel.|أنوي السفر.|`,`
+He will ___ tomorrow.|come|comes|came|بعد will مجرد.
+انفِ I will go|I won't go.|I don't will go.|I not will go.|won't = will not.
+We are going to ___ a house.|buy|bought|buying|بعد to مجرد.`);
+G('g-conj','حروف العطف والربط','<p>and و، but لكن، or أو، because لأن، so لذلك، if إذا، when عندما.</p>',`
+I am tired but happy.|أنا متعب لكن سعيد.|
+Stay home because it is hot.|ابقَ في البيت لأن الجو حار.|
+Tea or water?|شاي أم ماء؟|`,`
+I was hungry, ___ I ate.|so|but|or|نتيجة.
+He is rich ___ sad.|but|because|so|تناقض.
+Call me ___ you arrive.|when|or|but|عندما.`);
+G('g-comp','المقارنة والتفضيل','<p>للقصيرة: <bdi>-er than</bdi> و <bdi>the -est</bdi>. للطويلة: more … than و the most. شاذ: good, better, best.</p>',`
+Ali is taller than me.|علي أطول مني.|
+This is the biggest pump.|هذه أكبر مضخة.|
+Gold is more expensive than iron.|الذهب أغلى من الحديد.|`,`
+big + than|bigger than|more big than|biggest than|نضاعف g.
+أفضل (التفضيل) good|the best|the goodest|the more good|شاذ.
+beautiful للمقارنة|more beautiful|beautifuller|most beautiful than|كلمة طويلة.`);
+
+/* ---------- 9 ---------- */
+const N=(id,t,intro,s,qs)=>L(9,id,t,intro,{items:SN(s),qs:qs?Q(qs):[],build:true});
+N('x-short','جمل قصيرة','<p>ابدأ بفاعل وفعل، ثم أضف كلمة واحدة كل مرة.</p>',`
+I am here.|أنا هنا.|
+The boy runs.|الولد يركض.|
+She reads a story.|هي تقرأ قصة.|
+We drink cold water.|نشرب ماءً بارداً.|`);
+N('x-desc','وصف الأشخاص والأشياء','<p>استعمل be + صفة، أو have + صفة + اسم.</p>',`
+He is tall and strong.|هو طويل وقوي.|
+She has black hair.|شعرها أسود.|
+My car is old but good.|سيارتي قديمة لكنها جيدة.|
+This box is very heavy.|هذا الصندوق ثقيل جداً.|`);
+N('x-place','وصف الأماكن','<p><bdi>There is</bdi> يوجد (مفرد)، <bdi>There are</bdi> توجد (جمع).</p>',`
+There is a bed in my room.|يوجد سرير في غرفتي.|
+There are two windows.|توجد نافذتان.|
+The market is next to the bank.|السوق بجانب المصرف.|
+My city is big and busy.|مدينتي كبيرة ومزدحمة.|`,`
+There ___ three chairs.|are|is|am|جمع.
+There ___ a door.|is|are|be|مفرد.`);
+N('x-need','الحاجات والرغبات','<p>I need أحتاج، I want أريد، I would like أودّ (ألطف).</p>',`
+I need some help.|أحتاج بعض المساعدة.|
+I want to learn English.|أريد أن أتعلم الإنجليزية.|
+I would like a cup of tea.|أودّ كوباً من الشاي.|
+Can I use your phone?|هل يمكنني استعمال هاتفك؟|`);
+N('x-daily','تعبيرات يومية','<p>تعلّمها كقطعة واحدة.</p>',`
+How are you?|كيف حالك؟|هاو آر يو
+I'm fine, thank you.|أنا بخير، شكراً.|
+Nice to meet you.|تشرفت بمعرفتك.|
+Excuse me.|عذراً.|إكْسْكْيوز مي
+I don't understand.|لا أفهم.|
+Please speak slowly.|تكلّم ببطء من فضلك.|
+You're welcome.|عفواً.|
+See you later.|أراك لاحقاً.|`);
+N('x-talk','محادثة قصيرة','<p>اقرأ الحوار بالترتيب، ثم أجب عن الأسئلة.</p>',`
+A: Hello! What is your name?|أ: مرحباً! ما اسمك؟|
+B: My name is Omar.|ب: اسمي عمر.|
+A: Where are you from?|أ: من أين أنت؟|
+B: I am from Basra.|ب: أنا من البصرة.|
+A: Do you work here?|أ: هل تعمل هنا؟|
+B: Yes, I am a driver.|ب: نعم، أنا سائق.|`,`
+What is B's name?|Omar|Ali|Basra|قال: My name is Omar.
+Where is Omar from?|Basra|Baghdad|Mosul|I am from Basra.
+What is his job?|driver|doctor|teacher|I am a driver.`);
+
+/* ---------- 10 ---------- */
+const R=(id,t,intro,text,ar,words,qs)=>L(10,id,t,intro,{text,textar:ar,items:W(words),qs:Q(qs)});
+R('r-ali','قصة: يوم علي','<p>اقرأ النص وحدك أولاً. اسمعه بعد ذلك. لا تفتح الترجمة إلا في النهاية.</p>',
+'Ali is a worker. He wakes up at six. He eats bread and drinks tea. Then he goes to work by bus. At work, he wears a helmet. He comes home at five. In the evening, he reads a short story.',
+'علي عامل. يستيقظ الساعة السادسة. يأكل الخبز ويشرب الشاي. ثم يذهب إلى العمل بالحافلة. في العمل يلبس خوذة. يعود إلى البيت الساعة الخامسة. وفي المساء يقرأ قصة قصيرة.',`
+wake up|يستيقظ|ويْك أَپ
+helmet|خوذة|هِلْمِت
+then|ثم|ذِن`,`
+When does Ali wake up?|At six|At five|In the evening|He wakes up at six.
+How does he go to work?|By bus|By car|On foot|by bus.
+ما الفكرة الرئيسية؟|وصف يوم علي|طريقة صنع الشاي|إصلاح حافلة|النص يتتبع يومه.
+What does he wear at work?|A helmet|A hat for the sun|A bag|wears a helmet.`);
+R('r-market','حوار: في السوق','<p>انتبه لمن يتكلم.</p>',
+'Seller: Good morning. Can I help you? Sara: Yes, please. How much are the apples? Seller: Two dollars a kilo. Sara: I would like one kilo. Seller: Here you are. Sara: Thank you. Goodbye.',
+'البائع: صباح الخير. هل أساعدك؟ سارة: نعم من فضلك. بكم التفاح؟ البائع: دولاران للكيلو. سارة: أودّ كيلو واحداً. البائع: تفضّلي. سارة: شكراً. مع السلامة.',`
+seller|بائع|سِلَر
+how much|كم السعر|هاو مَچ
+here you are|تفضّل|`,`
+What does Sara buy?|Apples|Bread|Milk|سألت عن التفاح.
+How much is one kilo?|Two dollars|One dollar|Ten dollars|Two dollars a kilo.
+معنى Here you are هنا|تفضّلي|أنتِ هنا|تعالي هنا|تقال عند تسليم الشيء.`);
+R('r-instr','تعليمات وإرشادات','<p>التعليمات تبدأ غالباً بفعل أمر. <bdi>Do not</bdi> تعني لا تفعل.</p>',
+'How to charge the battery. First, turn off the machine. Next, connect the charger. Wait for three hours. Do not touch the wires with wet hands. When the light is green, disconnect the charger.',
+'كيفية شحن البطارية. أولاً أطفئ الآلة. بعد ذلك وصّل الشاحن. انتظر ثلاث ساعات. لا تلمس الأسلاك بيدين مبللتين. عندما يصير الضوء أخضر افصل الشاحن.',`
+turn off|يطفئ|تيرْن أوف
+connect|يوصّل|كَنِكْت
+wire|سلك|وايَر
+wet|مبلل|وِت`,`
+What is the first step?|Turn off the machine|Connect the charger|Wait|First, turn off.
+How long do you wait?|Three hours|Three minutes|One day|three hours.
+When do you disconnect?|When the light is green|When it is red|Immediately|الضوء الأخضر.
+ماذا يمنع النص؟|لمس الأسلاك بيد مبللة|استعمال الشاحن|الانتظار|Do not touch.`);
+R('r-context','المعنى من السياق','<p>إذا مرّت كلمة جديدة، اقرأ ما حولها وخمّن معناها قبل البحث.</p>',
+'It was very hot today. Hassan was thirsty, so he drank two bottles of cold water. After that, he was exhausted and wanted to sleep. His bed was very comfortable, and he fell asleep quickly.',
+'كان الجو حاراً جداً اليوم. كان حسن عطشان، فشرب قنينتين من الماء البارد. بعد ذلك كان منهكاً وأراد النوم. كان سريره مريحاً جداً، فنام بسرعة.',`
+thirsty|عطشان|ثيرسْتي
+bottle|قنينة|بوتَل
+exhausted|منهك|إگْزوسْتِد
+comfortable|مريح|كَمْفْتَبَل`,`
+من الجملة، thirsty تعني|عطشان|جائع|غاضب|لأنه شرب الماء.
+exhausted تعني|متعب جداً|نشيط|جائع|لأنه أراد النوم.
+Why did Hassan drink water?|He was thirsty|He was cold|He was late|so تدل على السبب.`);
+R('r-letter','فقرة: رسالة','<p>ميّز بين ما قيل صراحةً وما يُفهم ضمناً.</p>',
+'Dear Ahmed, I am sorry. I cannot come to your house tonight. My car is broken and the repair shop is closed until tomorrow. Can we meet on Friday instead? I will bring the books you asked for. Your friend, Karim.',
+'عزيزي أحمد، أنا آسف. لا أستطيع المجيء إلى بيتك الليلة. سيارتي معطلة ومحل التصليح مغلق حتى الغد. هل يمكن أن نلتقي يوم الجمعة بدلاً من ذلك؟ سأجلب الكتب التي طلبتها. صديقك كريم.',`
+broken|معطّل / مكسور|بْروكَن
+repair|تصليح|رِپير
+instead|بدلاً من ذلك|إنْسْتِد
+bring|يجلب|بْرِنْگ`,`
+Why can't Karim come?|His car is broken|He is sick|He is traveling|My car is broken.
+When does he want to meet?|On Friday|Tonight|Tomorrow|on Friday instead.
+ماذا نفهم ضمناً؟|يحتاج سيارته ليصل|لا يحب أحمد|باع سيارته|العطل منعه من المجيء.
+Who asked for the books?|Ahmed|Karim|The shop|you = أحمد.`);
+
+/* ---------- 11 ---------- */
+const T=(id,t,intro,s,qs)=>L(11,id,t,intro,{items:SN(s),qs:qs?Q(qs):[],translate:true});
+T('t-order','ترتيب الجملة عند الترجمة','<p>ابحث عن الفاعل ثم الفعل ثم الباقي. الصفة قبل الاسم في الإنجليزية وبعده في العربية. و is/are لا تُترجم غالباً.</p>',`
+The new engineer is in the small office.|المهندس الجديد في المكتب الصغير.|
+My brother bought a red car.|اشترى أخي سيارة حمراء.|
+The doors of the house are open.|أبواب البيت مفتوحة.|`);
+T('t-multi','كلمة بعدة معانٍ','<p>المعنى يحدده السياق: <bdi>light</bdi> ضوء أو خفيف. <bdi>right</bdi> يمين أو صحيح أو حق. <bdi>book</bdi> كتاب أو يحجز.</p>',`
+Turn on the light.|شغّل الضوء.|
+This bag is light.|هذه الحقيبة خفيفة.|
+Your answer is right.|جوابك صحيح.|
+I want to book a ticket.|أريد أن أحجز تذكرة.|
+This plant needs water.|هذه النبتة تحتاج ماءً.|`,`
+في This box is light، معنى light|خفيف|ضوء|فاتح اللون|يصف وزن الصندوق.
+Turn right معناها|انعطف يميناً|دُر بشكل صحيح|لديك الحق|اتجاه.
+Book a room معناها|احجز غرفة|كتاب الغرفة|اقرأ في الغرفة|book هنا فعل.`);
+T('t-idiom','تجنّب الترجمة الحرفية','<p>بعض التعبيرات لا يعطي مجموع كلماتها معناها. ترجم <b>المعنى</b>.</p>',`
+It's a piece of cake.|الأمر سهل جداً.|
+How old are you?|كم عمرك؟|
+I am looking for my key.|أبحث عن مفتاحي.|
+Take care.|اعتنِ بنفسك.|
+He gave up smoking.|أقلع عن التدخين.|
+Look out!|انتبه!|`);
+T('t-para','ترجمة فقرة','<p>اقرأ الفقرة كلها، ثم ترجمها جملة جملة، ثم اقرأ ترجمتك: هل تبدو عربية طبيعية؟</p>',`
+Water is very important for life.|الماء مهم جداً للحياة.|
+People should drink enough water every day.|ينبغي للناس أن يشربوا ماءً كافياً كل يوم.|
+In summer, the body needs more of it.|وفي الصيف يحتاج الجسم إلى المزيد منه.|
+Therefore, do not wait until you are thirsty.|لذلك لا تنتظر حتى تعطش.|`);
+T('t-work','نص عملي وتعليمي','<p>النصوص العملية تحتاج دقة. لا تحذف كلمة النفي ولا الأرقام.</p>',`
+Read the manual before you use the machine.|اقرأ دليل الاستعمال قبل استخدام الآلة.|
+Do not remove the safety cover.|لا تنزع غطاء الحماية.|
+Check the oil level daily.|افحص مستوى الزيت يومياً.|
+If the problem continues, contact the technician.|إذا استمرت المشكلة فاتصل بالفني.|`);
+
+/* ---------- 12 ---------- */
+const J=(id,t,s,intro,qs)=>L(12,id,t,intro||'<p>مصطلحات عامة. قد تختلف التسمية بين الشركات المصنّعة، فارجع إلى دليل جهازك.</p>',{items:W(s),qs:qs?Q(qs):[]});
+J('j-life','الحياة اليومية',`
+appointment|موعد|أَپوينْتْمَنْت|I have an appointment.|عندي موعد.
+receipt|وصل|رِسيت|Keep the receipt.|احتفظ بالوصل.
+price|سعر|پْرايْس|What is the price?|ما السعر؟
+address|عنوان|أَدْرِس|Write your address.|اكتب عنوانك.
+delivery|توصيل|دِلِڤَري|The delivery is free.|التوصيل مجاني.`);
+J('j-study','الدراسة',`
+homework|واجب بيتي|هوم-ويرْك|I did my homework.|أنجزت واجبي.
+exam|امتحان|إگْزَام|The exam is hard.|الامتحان صعب.
+chapter|فصل من كتاب|چَاپْتَر|Read chapter one.|اقرأ الفصل الأول.
+certificate|شهادة|سَرْتِفِكِت|I got a certificate.|حصلت على شهادة.
+summary|ملخّص|سَمَري|Write a summary.|اكتب ملخصاً.`);
+J('j-manual','الكتيبات والمواصفات الفنية',`
+manual|دليل الاستعمال|مَانْيوَل|Read the manual.|اقرأ الدليل.
+maintenance|صيانة|ميْنْتَنَنْس|Maintenance is weekly.|الصيانة أسبوعية.
+pressure|ضغط|پْرِشَر|Check the pressure.|افحص الضغط.
+capacity|سعة / قدرة|كَپَاسِتي|The tank capacity is large.|سعة الخزان كبيرة.
+output|الإنتاجية / الخرج|آوتْپُت|The output is high.|الإنتاجية عالية.
+maximum|الحد الأقصى|مَاكْسِمَم|Do not exceed the maximum load.|لا تتجاوز الحمل الأقصى.
+minimum|الحد الأدنى|مِنِمَم|Keep the minimum distance.|حافظ على المسافة الدنيا.`);
+J('j-safety','السلامة والتحذيرات',`
+danger|خطر|ديْنْجَر|Danger: high voltage.|خطر: جهد عالٍ.
+warning|تحذير|وورْنِنْگ|Read this warning.|اقرأ هذا التحذير.
+caution|احتراس|كوشَن|Caution: hot surface.|احتراس: سطح ساخن.
+keep out|ممنوع الدخول|كيپ آوت|Danger! Keep out.|خطر! ممنوع الدخول.
+hard hat|خوذة سلامة|هارْد هَات|Wear a hard hat.|ارتدِ خوذة السلامة.
+gloves|قفازات|گْلَڤْز|Use safety gloves.|استعمل قفازات السلامة.
+emergency stop|إيقاف الطوارئ|إمِرْجَنْسي سْتوپ|Press the emergency stop.|اضغط زر إيقاف الطوارئ.
+power line|خط كهرباء|پاوَر لايْن|Stay away from power lines.|ابتعد عن خطوط الكهرباء.`,'<p><b>Danger</b> أشد من <b>Warning</b>، و Warning أشد من <b>Caution</b>. هذا الدرس لغوي ولا يغني عن تدريب السلامة في موقع العمل.</p>');
+J('j-build','البناء والإنشاءات',`
+concrete|خرسانة|كونْكْريت|The concrete is fresh.|الخرسانة طرية.
+cement|إسمنت|سِمِنْت|We need more cement.|نحتاج إسمنتاً أكثر.
+steel bar|قضيب حديد|سْتيل بار|Fix the steel bars.|ثبّت قضبان الحديد.
+column|عمود|كولَم|The column is straight.|العمود مستقيم.
+beam|جسر (كمرة)|بيم|Pour the beam.|صبّ الجسر.
+slab|بلاطة / سقف|سْلَاب|The slab is ready.|البلاطة جاهزة.
+foundation|أساس|فاوْنْديْشَن|Check the foundation.|افحص الأساس.
+formwork|قالب خشبي أو حديدي|فورْم-ويرْك|The formwork is strong.|القالب قوي.`);
+J('j-pump','أجزاء مضخة الخرسانة',`
+concrete pump|مضخة خرسانة|كونْكْريت پَمْپ|The concrete pump is ready.|مضخة الخرسانة جاهزة.
+boom|الذراع|بوم|Unfold the boom slowly.|افتح الذراع ببطء.
+hopper|القادوس (حوض الاستقبال)|هوپَر|Fill the hopper.|املأ القادوس.
+agitator|الخلّاط المقلّب|أَجِتيْتَر|The agitator is turning.|المقلّب يدور.
+outrigger|مسند التثبيت|آوتْ-رِگَر|Extend the outriggers.|مدّ مساند التثبيت.
+delivery pipe|أنبوب النقل|دِلِڤَري پايْپ|Clean the delivery pipe.|نظّف أنبوب النقل.
+hose|خرطوم|هوز|Hold the end hose safely.|أمسك خرطوم النهاية بأمان.
+clamp|قفيص (مشبك)|كْلَامْپ|Check every clamp.|افحص كل مشبك.
+cylinder|أسطوانة|سِلِنْدَر|The cylinder is leaking.|الأسطوانة تسرّب.
+valve|صمّام|ڤَالْڤ|Close the valve.|أغلق الصمام.`);
+J('j-operate','التشغيل والصيانة',`
+start|يشغّل|سْتارْت|Start the engine.|شغّل المحرك.
+stop|يوقف|سْتوپ|Stop the pump.|أوقف المضخة.
+inspect|يفحص|إنْسْپِكْت|Inspect the pipes daily.|افحص الأنابيب يومياً.
+grease|يشحّم / شحم|گْريس|Grease the joints.|شحّم المفاصل.
+replace|يستبدل|رِپْليْس|Replace the filter.|استبدل المرشّح.
+tighten|يشدّ|تايْتَن|Tighten the bolts.|شدّ البراغي.
+release pressure|يحرّر الضغط|رِليس پْرِشَر|Release the pressure before opening.|حرّر الضغط قبل الفتح.
+clean out|ينظّف من الداخل|كْلين آوت|Clean out the line after pumping.|نظّف الخط بعد الضخ.`);
+J('j-fault','الأعطال والمشكلات',`
+blockage|انسداد|بْلوكِج|There is a blockage in the pipe.|يوجد انسداد في الأنبوب.
+leak|تسريب|ليك|I found an oil leak.|وجدت تسريب زيت.
+overheating|ارتفاع الحرارة|أوڤَر-هيتِنْگ|The engine is overheating.|المحرك ترتفع حرارته.
+noise|ضوضاء / صوت غير طبيعي|نويْز|There is a strange noise.|يوجد صوت غريب.
+vibration|اهتزاز|ڤايْبْريْشَن|The vibration is strong.|الاهتزاز قوي.
+failure|عطل / إخفاق|فيْلْيَر|Report any failure.|أبلغ عن أي عطل.
+worn|متآكل|وورْن|The seal is worn.|مانع التسرب متآكل.
+spare part|قطعة غيار|سْپير پارْت|We need a spare part.|نحتاج قطعة غيار.`,null,`
+معنى The pipe is blocked|الأنبوب مسدود|الأنبوب مكسور|الأنبوب نظيف|blocked = مسدود.`);
+
+'use strict';
+const KEY='english-journey-v1',DAY=864e5,GAP=[0,1,2,4,8,16,32];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const AR=/[؀-ۿ]/;
+const tx=s=>AR.test(s)?`<span dir="auto">${esc(s)}</span>`:`<span class="en">${esc(s)}</span>`;
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=a=>a[Math.random()*a.length|0];
+const norm=s=>String(s).toLowerCase().replace(/[.,!?'"’]/g,'').trim().replace(/\s+/g,' ');
+
+/* ---------- العناصر ---------- */
+const ITEMS={};
+const keyOf=i=>i.t+':'+i.en;
+LESSONS.forEach(l=>l.items.forEach(i=>{const k=keyOf(i);if(!ITEMS[k]){ITEMS[k]=i;i.key=k;i.stage=l.stage;i.lesson=l.id}else i.key=k}));
+const QMAP={};
+LESSONS.forEach(l=>l.qs.forEach((q,n)=>{q.key='q:'+l.id+':'+n;q.stage=l.stage;q.lesson=l.id;QMAP[q.key]=q}));
+const lessonById=id=>LESSONS.find(l=>l.id===id);
+
+/* ---------- الحالة والحفظ ---------- */
+const fresh=()=>({app:'english-journey',v:1,updatedAt:0,onboarded:false,done:{},resume:{},srs:{},sessions:[],tests:[],time:0,last:null,active:null,
+ set:{theme:'auto',font:100,accent:'en-US',voice:'',rate:.8,per:0,minutes:0,translit:true,unlock:false}});
+const isObj=o=>o&&typeof o==='object'&&!Array.isArray(o);
+const num=(x,d=0)=>Number.isFinite(x)?x:d;
+/* ينظّف أي بيانات محمّلة (من الجهاز أو من ملف) */
+function sanitize(o){
+ const s=fresh();if(!isObj(o)||o.app!=='english-journey')return null;
+ s.updatedAt=num(o.updatedAt);s.onboarded=!!o.onboarded;s.time=Math.max(0,num(o.time));
+ if(isObj(o.done))for(const[k,v]of Object.entries(o.done))if(lessonById(k)&&isObj(v))s.done[k]={best:num(v.best),passed:!!v.passed,tries:num(v.tries),at:num(v.at),placed:!!v.placed};
+ if(isObj(o.srs))for(const[k,v]of Object.entries(o.srs))if((ITEMS[k]||QMAP[k])&&isObj(v)){const sk={};if(isObj(v.sk))for(const[a,b]of Object.entries(v.sk))if(SKILL[a]&&Array.isArray(b))sk[a]=[num(b[0]),num(b[1])];s.srs[k]={box:Math.min(6,Math.max(0,num(v.box)|0)),due:num(v.due),r:num(v.r),w:num(v.w),sk}}
+ if(Array.isArray(o.sessions))s.sessions=o.sessions.filter(isObj).slice(-500).map(x=>({at:num(x.at),sec:num(x.sec),ok:num(x.ok),n:num(x.n),min:num(x.min)}));
+ if(Array.isArray(o.tests))s.tests=o.tests.filter(isObj).slice(-200).map(x=>({at:num(x.at),name:String(x.name||'').slice(0,80),ok:num(x.ok),n:num(x.n)}));
+ if(isObj(o.resume))for(const[k,v]of Object.entries(o.resume))if(lessonById(k)&&isObj(v))s.resume[k]={step:Math.max(0,num(v.step)|0)};
+ if(lessonById(o.last))s.last=o.last;
+ if(isObj(o.active))s.active={start:num(o.active.start),sec:num(o.active.sec),ok:num(o.active.ok),n:num(o.active.n),min:num(o.active.min),rang:!!o.active.rang};
+ if(isObj(o.set)){const t=o.set,d=s.set;if(['auto','light','dark'].includes(t.theme))d.theme=t.theme;d.font=Math.min(140,Math.max(90,num(t.font,100)));if(['en-US','en-GB'].includes(t.accent))d.accent=t.accent;d.voice=String(t.voice||'');d.rate=Math.min(1.2,Math.max(.5,num(t.rate,.8)));d.per=[0,2,3,4].includes(t.per)?t.per:0;d.minutes=[0,5,10,15,20].includes(t.minutes)?t.minutes:0;d.translit=t.translit!==false;d.unlock=!!t.unlock}
+ return s}
+const SKILL={look:'التعرّف على الشكل',listen:'الاستماع',meaning:'فهم المعنى',recall:'تذكّر الكلمة',spell:'الإملاء',order:'بناء الجمل',rule:'القواعد والفهم',translate:'الترجمة (تقييمك)'};
+let saveOK=true,S;
+function load(){try{const r=localStorage.getItem(KEY);if(r){const s=sanitize(JSON.parse(r));if(s)return s;localStorage.setItem(KEY+'-broken',r)}}catch(e){saveOK=false}return fresh()}
+function save(){S.updatedAt=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S));saveOK=true}catch(e){saveOK=false}}
+
+/* ---------- المراجعة المتباعدة ---------- */
+function record(key,ok,skill){
+ const now=Date.now();let r=S.srs[key];
+ if(!r)r=S.srs[key]={box:0,due:now,r:0,w:0,sk:{}};
+ const sk=r.sk[skill]||(r.sk[skill]=[0,0]);
+ if(ok){r.r++;sk[0]++;if(r.due<=now){r.box=Math.min(6,r.box+1);r.due=startDay(now)+GAP[r.box]*DAY}}
+ else{r.w++;sk[1]++;r.box=0;r.due=now}
+}
+const startDay=t=>{const d=new Date(t);d.setHours(0,0,0,0);return d.getTime()};
+const dueKeys=()=>Object.keys(S.srs).filter(k=>S.srs[k].due<=Date.now()).sort((a,b)=>S.srs[a].box-S.srs[b].box||S.srs[b].w-S.srs[a].w||S.srs[a].due-S.srs[b].due);
+/* متقن: صندوق 3 فأعلى ونجاح في مهارتين على الأقل */
+const mastered=k=>{const r=S.srs[k];if(!r||r.box<3)return false;const n=Object.values(r.sk).filter(a=>a[0]>0).length;return n>=(ITEMS[k]?2:1)};
+const weak=k=>{const r=S.srs[k];return r&&r.w>0&&r.box<2};
+
+/* ---------- الصوت ---------- */
+const TTS='speechSynthesis'in window&&'SpeechSynthesisUtterance'in window;
+let voices=[];
+function loadVoices(){if(TTS)voices=speechSynthesis.getVoices().filter(v=>/^en([-_]|$)/i.test(v.lang))}
+if(TTS){loadVoices();speechSynthesis.addEventListener?.('voiceschanged',()=>{loadVoices();if(view.name==='settings')render()})}
+function chosenVoice(){return voices.find(v=>v.voiceURI===S.set.voice)||voices.find(v=>v.lang.replace('_','-')===S.set.accent&&v.localService)||voices.find(v=>v.lang.replace('_','-')===S.set.accent)||voices[0]}
+function speak(text,slow){
+ if(!TTS){toast('هذا المتصفح لا يدعم النطق. جرّب Chrome أو Safari.');return}
+ loadVoices();speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text),v=chosenVoice();
+ if(v){u.voice=v;u.lang=v.lang}else u.lang=S.set.accent;
+ u.rate=slow?.5:S.set.rate;
+ u.onerror=e=>{if(!['interrupted','canceled'].includes(e.error))toast('تعذّر تشغيل الصوت. تأكد من وجود صوت إنجليزي في جهازك.')};
+ speechSynthesis.speak(u)}
+const LETTERSAY={A:'ay',B:'bee',C:'see',D:'dee',E:'ee',F:'eff',G:'jee',H:'aitch',I:'eye',J:'jay',K:'kay',L:'el',M:'em',N:'en',O:'oh',P:'pee',Q:'cue',R:'ar',S:'ess',T:'tee',U:'you',V:'vee',W:'double you',X:'ex',Y:'why',Z:'zee'};
+const sayOf=i=>i.t==='l'?LETTERSAY[i.en]:i.en.replace(/^[AB]: /,'');
+const sbtn=(t,label='استمع')=>`<button class="snd" data-a="say" data-t="${esc(t)}" aria-label="${esc(label)}">🔊</button>`;
+
+/* ---------- توليد الأسئلة ---------- */
+const SAME=[['to','two','too'],['there','their'],['here','hear']];
+/* لا نضع خياراً صحيحاً أيضاً: نفس المعنى أو نفس النطق */
+const clash=(a,b)=>a!==b&&a.t!=='l'&&(a.ar===b.ar||SAME.some(g=>g.includes(a.en)&&g.includes(b.en)));
+function others(item,field,n,pool){
+ const val=item[field],seen=new Set([val]),out=[];
+ for(const x of shuffle(pool).concat(shuffle(Object.values(ITEMS).filter(x=>x.t===item.t)))){if(x.t===item.t&&!clash(item,x)&&x[field]&&!seen.has(x[field])){seen.add(x[field]);out.push(x[field]);if(out.length===n)break}}
+ return out}
+const mc=(key,skill,html,a,wrong,why,extra)=>Object.assign({type:'mc',key,skill,html,a,opts:shuffle([a,...wrong]),why},extra);
+function qFrom(q){const m=q.q.match(/^\[say:(\w+)\]\s*(.*)$/);return mc(q.key,m?'listen':'rule',`<h3 dir="auto">${esc(m?m[2]:q.q)}</h3>`,q.a,q.o,q.why,m?{say:m[1]}:{})}
+function kinds(i,l){
+ if(i.t==='l')return i.en==='X'?['case','listen','small']:['case','listen','first','small'];
+ if(i.t==='s'){const k=['meaning','listen'];if(i.en.split(' ').length>2&&i.en.split(' ').length<10&&!i.en.includes(':'))k.push('order');if(l&&l.translate)return['translate','meaning','order'].filter(x=>x!=='order'||k.includes('order'));return k}
+ const k=['meaning','listen','recall'];if(/^[a-z]{2,9}$/i.test(i.en))k.push('letters');if(i.exar)k.push('read');if(l&&l.spell)return['type','letters','meaning'].filter(x=>x!=='letters'||k.includes('letters'));if(l&&l.blend)return['listen','meaning','letters'];return k}
+function qItem(i,kind,pool){
+ const K=i.key,why=i.t==='l'?`${i.en} ${i.low} — اسمه «${i.arn}»`:`${i.en} = ${i.ar}`;
+ if(i.t==='l'){
+  if(kind==='case')return mc(K,'look',`<h3>ما الحرف الصغير المطابق؟</h3><div class="paper">${i.en}</div>`,i.low,others(i,'low',3,pool),why);
+  if(kind==='small')return mc(K,'look',`<h3>ما الحرف الكبير المطابق؟</h3><div class="paper">${i.low}</div>`,i.en,others(i,'en',3,pool),why);
+  if(kind==='listen')return mc(K,'listen','<h3>استمع واختر الحرف (اسمه)</h3>',i.en,others(i,'en',3,pool),why,{say:LETTERSAY[i.en]});
+  const e=pick(i.ex);return mc(K,'look',`<h3>بأي حرف تبدأ هذه الكلمة؟</h3><p>${e.pic} ${esc(e.ar)}</p>`,i.low,others(i,'low',3,pool),`${e.w} تبدأ بالحرف ${i.low}`,{say:e.w})}
+ if(kind==='listen')return mc(K,'listen','<h3>استمع واختر ما سمعت</h3>',i.en,others(i,'en',2,pool),why,{say:sayOf(i)});
+ if(kind==='meaning')return mc(K,'meaning',`<h3>ما المعنى؟</h3><div class="sent">${esc(i.en)}</div>${sbtn(sayOf(i))}`,i.ar,others(i,'ar',3,pool),why);
+ if(kind==='recall')return mc(K,'recall',`<h3>أي كلمة تعني «${esc(i.ar)}»؟</h3>`,i.en,others(i,'en',3,pool),why);
+ if(kind==='read')return mc(K,'meaning',`<h3>اقرأ الجملة. ما معناها؟</h3><div class="sent">${esc(i.ex)}</div>${sbtn(i.ex)}`,i.exar,others(i,'exar',2,pool.filter(x=>x.exar)),`${i.ex} = ${i.exar}`);
+ if(kind==='letters')return{type:'build',key:K,skill:'spell',html:`<h3>رتّب الحروف لتكتب: «${esc(i.ar)}»</h3>`,say:sayOf(i),parts:shuffle(i.en.split('')),a:i.en,sep:'',why};
+ if(kind==='order'){const p=i.en.split(' ');let m=shuffle(p);if(m.join(' ')===i.en)m.reverse();return{type:'build',key:K,skill:'order',html:`<h3>رتّب الكلمات: «${esc(i.ar)}»</h3>`,parts:m,a:i.en,sep:' ',why}}
+ if(kind==='type')return{type:'type',key:K,skill:'spell',html:`<h3>اكتب الكلمة التي تسمعها</h3><p class="mut">معناها: ${esc(i.ar)}</p>`,say:sayOf(i),a:i.en,why};
+ return{type:'self',key:K,skill:'translate',html:`<h3>ترجم إلى العربية</h3><div class="sent">${esc(i.en)}</div>${sbtn(sayOf(i))}`,a:i.ar,why}}
+function qForKey(k){if(QMAP[k])return qFrom(QMAP[k]);const i=ITEMS[k];if(!i)return null;const l=lessonById(i.lesson),ks=kinds(i,l),r=S.srs[k];
+ /* نبدأ بالمهارة الأقل نجاحاً */
+ const sc=x=>{const q=qItem(i,x,Object.values(ITEMS).filter(y=>y.lesson===i.lesson));const a=r&&r.sk[q.skill];return{q,s:(a?a[0]-a[1]:0)+Math.random()}};
+ return ks.map(sc).sort((a,b)=>a.s-b.s)[0].q}
+function lessonQuiz(l){
+ let items=l.items.slice();const pool=items;
+ if(l.reviewOnly)items=shuffle(items).slice(0,l.count);
+ else if(items.length>10)items=shuffle(items).slice(0,10);
+ const qs=[];
+ items.forEach((i,n)=>{const ks=kinds(i,l);qs.push(qItem(i,ks[n%ks.length],pool));if(l.items.length<=4)qs.push(qItem(i,ks[(n+1)%ks.length],pool))});
+ l.qs.forEach(q=>qs.push(qFrom(q)));
+ if(l.stage===1&&!l.reviewOnly&&items.length>1)qs.push({type:'match',skill:'look',items});
+ return shuffle(qs)}
+
+/* ---------- الاختبار ---------- */
+let quiz=null;
+function startQuiz(qs,meta){quiz=Object.assign({queue:qs,i:0,total:qs.length,first:0,wrong:[],answered:null,built:[],redo:new Set(),m:{sel:null,done:[],miss:new Set()}},meta);go('quiz')}
+function answer(ok,given){
+ const q=quiz.queue[quiz.i];quiz.answered={ok,given};
+ const retry=quiz.redo.has(q);
+ if(!quiz.placement){if(q.key&&!retry)record(q.key,ok,q.skill);quizActivity(ok)}
+ if(!retry){if(ok)quiz.first++;else{quiz.wrong.push(q);
+  if(!quiz.placement){const c=Object.assign({},q,q.opts?{opts:shuffle(q.opts)}:{},q.parts?{parts:shuffle(q.parts)}:{});quiz.redo.add(c);quiz.queue.push(c)}}}
+ save();render()}
+function quizActivity(ok){ensureSession();S.active.n++;if(ok)S.active.ok++}
+function nextQ(){quiz.i++;quiz.answered=null;quiz.built=[];quiz.m={sel:null,done:[],miss:new Set()};
+ if(quiz.i>=quiz.queue.length)finishQuiz();else{go('quiz');autoSay()}}
+function autoSay(){const q=quiz&&quiz.queue[quiz.i];if(q&&q.say&&view.name==='quiz')speak(q.say)}
+function finishQuiz(){
+ const score=quiz.total?Math.round(quiz.first/quiz.total*100):0;
+ if(quiz.placement){const by={};quiz.queue.forEach((q,n)=>{(by[q.pstage]=by[q.pstage]||[]).push(!quiz.wrong.includes(q))});let st=1;for(const s of PSTAGES){if(by[s]&&by[s].filter(Boolean).length/by[s].length>=.75)st=s===PSTAGES.at(-1)?s+1:PSTAGES[PSTAGES.indexOf(s)+1];else break}quiz.result={score,stage:st};go('result');return}
+ S.tests.push({at:Date.now(),name:quiz.name,ok:quiz.first,n:quiz.total});
+ if(quiz.lesson){const d=S.done[quiz.lesson]||{best:0,passed:false,tries:0};d.tries++;d.best=Math.max(d.best,score);d.passed=d.passed||score>=80;d.at=Date.now();d.placed=false;S.done[quiz.lesson]=d;if(d.passed)delete S.resume[quiz.lesson]}
+ save();quiz.result={score};go('result')}
+
+/* ---------- الدروس ---------- */
+const passed=id=>S.done[id]?.passed;
+const mainLessons=LESSONS.filter(l=>l.stage<12);
+function unlocked(l){
+ if(S.set.unlock||passed(l.id))return true;
+ if(l.stage===12){const first=LESSONS.find(x=>x.stage===12);return l===first?LESSONS.filter(x=>x.stage<=3).every(x=>passed(x.id)):passed(LESSONS[LESSONS.indexOf(l)-1].id)}
+ const n=mainLessons.indexOf(l);return n===0||passed(mainLessons[n-1].id)}
+const nextLesson=()=>mainLessons.find(l=>!passed(l.id))||LESSONS.find(l=>!passed(l.id));
+/* خطوات الدرس: شرح، (نص)، دفعات من العناصر، مراجعة سريعة */
+function stepsOf(l){
+ const st=[{k:'intro'}];if(l.text)st.push({k:'text'});
+ if(!l.reviewOnly&&l.items.length){
+  const per=l.items[0].t==='l'?1:(S.set.per||3);
+  for(let i=0;i<l.items.length;i+=per)st.push({k:'items',list:l.items.slice(i,i+per)});
+  st.push({k:'recap'})}
+ else st.push({k:'ready'});
+ return st}
+/* تقسيم دروس الحروف حسب اختيار المستخدم يتم بعدد الحروف في كل جلسة تدريب */
+function openLesson(id){const l=lessonById(id);if(!l||!unlocked(l))return;ensureSession();S.last=id;if(!S.resume[id])S.resume[id]={step:0};save();go('lesson',{id})}
+
+/* ---------- الجلسات والمؤقت ---------- */
+let lastTouch=Date.now();
+['pointerdown','keydown'].forEach(e=>addEventListener(e,()=>lastTouch=Date.now(),{passive:true}));
+function ensureSession(min){if(!S.active)S.active={start:Date.now(),sec:0,ok:0,n:0,min:min||0,rang:false}}
+function endSession(){const a=S.active;if(!a)return;S.active=null;const counts=a.n>0||a.sec>=60;if(counts)S.sessions.push({at:Date.now(),sec:a.sec,ok:a.ok,n:a.n,min:a.min});save();
+ modal(`<h2>${counts?'أحسنت، انتهت الجلسة':'أُغلقت الجلسة'}</h2>${counts?`<p>الوقت: <b>${dur(a.sec)}</b></p><p>الإجابات: ${a.n}، الصحيحة: ${a.ok}</p><p>جلساتك المكتملة: <b>${S.sessions.length}</b></p><p class="mut">كل جلسة تُحسب، قصيرة كانت أو طويلة.</p>`:'<p>لم تُحسب لأنها أقصر من دقيقة ولا تحتوي إجابات.</p>'}`,[['حسناً',()=>render(),'pri']])}
+const clock=s=>String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+const dur=s=>s<60?s+' ثانية':s<3600?(s/60|0)+' دقيقة':(s/3600|0)+' ساعة و'+((s%3600)/60|0)+' دقيقة';
+const timerText=()=>{const a=S.active;if(!a)return'';if(!a.min)return'⏱ '+clock(a.sec);const left=a.min*60-a.sec;return left>0?'⏳ '+clock(left):'✓ انتهى الوقت'};
+let ticks=0;
+setInterval(()=>{const a=S.active;if(!a||document.hidden)return;
+ /* لا نحسب الوقت إذا تُرك الجهاز دون لمس 3 دقائق */
+ if(Date.now()-lastTouch>180000)return;
+ a.sec++;S.time++;if(++ticks%5===0)save();
+ const el=$('#timer');if(el)el.textContent=timerText();
+ if(a.min&&!a.rang&&a.sec>=a.min*60){a.rang=true;save();modal(`<h2>انتهت مدة الجلسة (${a.min} دقيقة)</h2><p>تستطيع إكمال الدرس دون مؤقت، أو إنهاء الجلسة الآن.</p>`,[['أكمل',()=>{if(S.active){S.active.min=0;save()}render()},''],['أنهِ الجلسة',endSession,'pri']])}},1000);
+addEventListener('pagehide',()=>{if(S.active)save()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&S.active)save()});
+
+/* ---------- العرض ---------- */
+let view={name:'home'};
+function go(name,p){view=Object.assign({name},p);render();scrollTo(0,0)}
+let toastT;
+function toast(m){let t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,4500)}
+function modal(html,btns){const m=$('#modal');m.innerHTML=`<div role="dialog" aria-modal="true">${html}<div class="row" id="mb"></div></div>`;m.hidden=false;
+ btns.forEach(([label,fn,cls])=>{const b=document.createElement('button');b.textContent=label;b.className=cls||'';b.onclick=()=>{m.hidden=true;fn&&fn()};$('#mb').append(b)});$('#mb button:last-child')?.focus()}
+const defaultTheme=document.documentElement.getAttribute('data-theme');
+let lastTheme='auto';
+function applyLook(){const r=document.documentElement,t=S.set.theme;
+ if(t!=='auto')r.setAttribute('data-theme',t);else if(lastTheme!=='auto'){defaultTheme?r.setAttribute('data-theme',defaultTheme):r.removeAttribute('data-theme')}
+ lastTheme=t;r.style.fontSize=S.set.font+'%'}
+const bar=(a,b)=>`<div class="bar" role="progressbar" aria-valuenow="${b?Math.round(a/b*100):0}" aria-valuemin="0" aria-valuemax="100"><i style="width:${b?a/b*100:0}%"></i></div>`;
+const back=(to='home',label='الرئيسية')=>`<button data-a="go" data-v="${to}">→ ${label}</button>`;
+function render(){
+ applyLook();
+ const a=S.active;
+ $('#app').innerHTML=`<header class="top"><button data-a="go" data-v="home" class="brand" aria-label="الرئيسية">English Journey</button>
+ <div class="sess">${a?`<span id="timer">${timerText()}</span><button data-a="end">إنهاء الجلسة</button>`:''}</div></header>
+ ${saveOK?'':'<div class="card warn" role="alert">تعذّر الحفظ في هذا المتصفح (ربما وضع التصفح الخاص). صدّر نسخة احتياطية من الإعدادات حتى لا يضيع تقدمك.</div>'}
+ <main>${VIEWS[view.name]()}</main>`;
+ if(view.name==='lesson')initCanvas()}
+const VIEWS={
+home(){
+ const done=LESSONS.filter(l=>l.stage<12&&passed(l.id)).length,total=mainLessons.length,n=nextLesson(),due=dueKeys().length;
+ const last=S.last&&lessonById(S.last);
+ return`<h1>أهلاً بك 👋</h1><p class="mut">${S.sessions.length?'نكمل من حيث توقفت.':'نبدأ من الصفر، خطوة خطوة.'}</p>
+ ${!S.onboarded?`<div class="card"><h3>من أين تبدأ؟</h3><p>إن كنت لا تعرف الحروف فابدأ من الصفر.</p><div class="row"><button class="pri" data-a="zero">ابدأ من الصفر</button><button data-a="placement">اختبار تحديد المستوى</button></div></div>`:
+ `<button class="pri big" data-a="start">ابدأ التعلم</button>`}
+ <div class="card"><div class="mut">المرحلة الحالية</div><h3>${n?`${n.stage} — ${esc(STAGES[n.stage].title)}`:'أكملت كل الدروس 🎉'}</h3>
+ <div class="mut">آخر درس وصلت إليه: ${last?esc(last.title):'لم تبدأ بعد'}</div>
+ ${last&&!passed(last.id)?`<button data-a="lesson" data-id="${last.id}">تابع «${esc(last.title)}»</button>`:''}
+ <p>التقدم في المنهج الأساسي: <b>${Math.round(done/total*100)}٪</b> <span class="mut">(${done} من ${total} درساً${Object.values(S.done).some(d=>d.placed)?"، منها ما تخطّاه التقييم":""})</span></p>${bar(done,total)}</div>
+ <div class="grid"><div class="card stat"><b>${S.sessions.length}</b>جلسة مكتملة</div><div class="card stat"><b>${S.time/60|0}</b>دقيقة تعلّم</div></div>
+ <div class="grid"><button data-a="go" data-v="review">🔁 المراجعة ${due?`(${due})`:''}</button><button data-a="go" data-v="tests">📝 الاختبارات</button>
+ <button data-a="go" data-v="map">🗺️ المنهج والدروس</button><button data-a="go" data-v="stats">📊 الإحصائيات</button></div>
+ <p><button class="big" data-a="go" data-v="settings">⚙️ الإعدادات والنسخ الاحتياطي</button></p>`},
+start(){const n=nextLesson();return`${back()}<h1>جلسة جديدة</h1><div class="card"><p>اختر مدة الجلسة. المؤقت اختياري.</p><div class="row">${[0,5,10,15,20].map(m=>`<button data-a="min" data-m="${m}" class="${S.set.minutes===m?'sel':''}" aria-pressed="${S.set.minutes===m}">${m?m+' دقيقة':'بلا مؤقت'}</button>`).join('')}</div></div>
+ ${dueKeys().length?`<div class="card"><p>عندك ${dueKeys().length} عنصراً للمراجعة. الأفضل أن تبدأ بها.</p><button data-a="begin" data-to="review">ابدأ بالمراجعة</button></div>`:''}
+ ${n?`<button class="pri big" data-a="begin" data-to="${n.id}">الدرس: ${esc(n.title)}</button>`:'<p>أكملت الدروس. استمر بالمراجعة.</p>'}`},
+map(){const cur=nextLesson();return`${back()}<h1>المنهج</h1>${STAGES.map(s=>{const ls=LESSONS.filter(l=>l.stage===s.id),d=ls.filter(l=>passed(l.id)).length;
+ return`<details ${cur&&cur.stage===s.id?'open':''}><summary>المرحلة ${s.id}: ${esc(s.title)} <span class="mut">${d}/${ls.length}</span></summary><div class="mut">${esc(s.sub)}${s.id===12?' — تُفتح بعد إتمام المرحلة 3':''}</div>
+ ${ls.map(l=>`<button class="lesson" data-a="lesson" data-id="${l.id}" ${unlocked(l)?'':'disabled'}><span>${LESSONS.indexOf(l)+1}. ${esc(l.title)}</span><span>${passed(l.id)?(S.done[l.id].placed?'تخطّاه التقييم':'✓ '+S.done[l.id].best+'٪'):unlocked(l)?'▶':'🔒'}</span></button>`).join('')}</details>`}).join('')}`},
+lesson(){
+ const l=lessonById(view.id),st=stepsOf(l),r=S.resume[l.id]||(S.resume[l.id]={step:0});const n=Math.min(r.step,st.length-1),s=st[n];
+ let body='';
+ if(s.k==='intro')body=`<div class="card"><h2>الشرح</h2>${l.intro}</div>`;
+ if(s.k==='text')body=`<div class="card"><h2>النص</h2><div class="sent">${esc(l.text)}</div><div class="row">${sbtn(l.text,'استمع للنص')}<button data-a="slow" data-t="${esc(l.text)}">🐢 ببطء</button><button data-a="stop">⏹ إيقاف</button></div><details><summary>الترجمة (بعد أن تحاول)</summary><p>${esc(l.textar)}</p></details></div>`;
+ if(s.k==='items')body=s.list.map(i=>card(i,l)).join('');
+ if(s.k==='recap')body=`<div class="card"><h2>مراجعة سريعة</h2><p class="mut">غطِّ العربية بيدك وحاول التذكّر.</p><div class="tw"><table>${l.items.map(i=>`<tr><td>${sbtn(sayOf(i))}</td><td dir="ltr" class="en">${esc(i.t==='l'?i.en+' '+i.low:i.en)}</td><td>${esc(i.t==='l'?i.arn:i.ar)}</td></tr>`).join('')}</table></div></div>`;
+ if(s.k==='ready')body=`<div class="card"><p>جاهز؟ أجب بهدوء. تستطيع الإعادة كما تشاء.</p></div>`;
+ const end=n===st.length-1;
+ return`${back('map','الدروس')}<h1>${esc(l.title)}</h1><div class="mut">درس ${LESSONS.indexOf(l)+1} · المرحلة ${l.stage}: ${esc(STAGES[l.stage].title)} · خطوة ${n+1} من ${st.length}</div>${bar(n+1,st.length)}${body}
+ <div class="row between"><button data-a="step" data-d="-1" ${n?'':'disabled'}>→ السابق</button>
+ ${end?`<button class="pri" data-a="quiz" data-id="${l.id}">ابدأ التدريب والاختبار</button>`:`<button class="pri" data-a="step" data-d="1">التالي ←</button>`}</div>
+ ${n&&!end?`<p><button data-a="quiz" data-id="${l.id}">انتقل للاختبار مباشرة</button></p>`:''}
+ ${l.items.length?`<p><button data-a="lrev" data-id="${l.id}">🔁 مراجعة عناصر هذا الدرس</button></p>`:''}`},
+quiz(){
+ const q=quiz.queue[quiz.i],an=quiz.answered;let b='';
+ const head=`<div class="row between">${quiz.lesson?`<button data-a="lesson" data-id="${quiz.lesson}">→ الدرس</button>`:back()}<span class="mut">${quiz.redo.has(q)?'إعادة ما أخطأت به':'سؤال '+(quiz.i+1)+' من '+quiz.total}</span></div>${bar(quiz.i,quiz.queue.length)}`;
+ if(q.type==='match'){const m=quiz.m;if(!m.l){m.l=shuffle(q.items);m.r=shuffle(q.items)}
+  const btn=(i,side)=>`<button data-a="match" data-s="${side}" data-k="${esc(i.en)}" class="${m.done.includes(i.en)?'ok':side==='L'&&m.sel===i.en?'sel':''}" ${m.done.includes(i.en)?'disabled':''}>${side==='L'?i.en:i.low}</button>`;
+  return`${head}<div class="card"><h3>صِل الحرف الكبير بالصغير</h3><p class="mut">اضغط الكبير ثم الصغير.</p><div class="pairs">${m.l.map((x,n)=>btn(x,'L')+btn(m.r[n],'R')).join('')}</div></div>${an?fb(q,an):''}`}
+ if(q.type==='mc')b=`<div class="opts">${q.opts.map((o,n)=>`<button data-a="opt" data-n="${n}" ${an?'disabled':''} class="${an?(o===q.a?'ok':o===an.given?'no':''):''}">${tx(o)}</button>`).join('')}</div>`;
+ if(q.type==='build')b=`<div class="chips slot" aria-label="إجابتك">${quiz.built.map((p,n)=>`<button data-a="unbuild" data-n="${n}" ${an?'disabled':''}>${esc(q.parts[p])}</button>`).join('')}</div>
+  <div class="chips">${q.parts.map((p,n)=>quiz.built.includes(n)?'':`<button data-a="build" data-n="${n}" ${an?'disabled':''}>${esc(p)}</button>`).join('')}</div>
+  ${an?'':`<button class="pri" data-a="check" ${quiz.built.length===q.parts.length?'':'disabled'}>تحقّق</button> <button data-a="giveup">لا أعرف</button>`}`;
+ if(q.type==='type')b=`<form id="typef" class="row"><input type="text" id="typed" dir="ltr" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="اكتب بالإنجليزية" value="${an?esc(an.given):''}" ${an?'disabled':''}>${an?'':'<button class="pri">تحقّق</button><button type="button" data-a="giveup">لا أعرف</button>'}</form>`;
+ if(q.type==='self')b=an?'':quiz.shown?`<div class="card"><div class="mut">ترجمة نموذجية</div><p>${esc(q.a)}</p><p class="mut">قارن المعنى لا الألفاظ: هل الفاعل والفعل والنفي والأرقام صحيحة؟</p><div class="row"><button class="pri" data-a="self" data-ok="1">ترجمتي تؤدي المعنى</button><button data-a="self" data-ok="0">تحتاج تحسيناً</button></div></div>`:
+  `<textarea id="mytr" aria-label="ترجمتك" placeholder="اكتب ترجمتك هنا"></textarea><button class="pri" data-a="show">اعرض الترجمة النموذجية</button>`;
+ return`${head}<div class="card">${q.html}${q.say?`<div class="row"><button class="pri" data-a="say" data-t="${esc(q.say)}">🔊 استمع</button><button data-a="slow" data-t="${esc(q.say)}">🐢 ببطء</button>${an?'':'<button data-a="reveal">لا أسمع الصوت</button>'}</div><p id="reveal" class="mut" hidden>الصوت يقول: <span class="en">${esc(q.say)}</span> — لن يُعدّ هذا تدريب استماع.</p>`:''}${b}</div>${an?fb(q,an):''}`},
+result(){
+ const r=quiz.result;
+ if(quiz.placement)return`<h1>نتيجة التقييم: ${r.score}٪</h1><div class="card">${r.stage>1?`<p>تبدو مستعداً للبدء من <b>المرحلة ${r.stage}: ${esc(STAGES[r.stage].title)}</b>. هذا تقدير أولي من أسئلة قليلة.</p><div class="row"><button class="pri" data-a="place" data-s="${r.stage}">ابدأ من المرحلة ${r.stage}</button><button data-a="zero">ابدأ من الصفر</button></div>`:'<p>الأفضل أن تبدأ من الصفر. هذا طبيعي تماماً.</p><button class="pri" data-a="zero">ابدأ من الصفر</button>'}</div>`;
+ const l=quiz.lesson&&lessonById(quiz.lesson),ok=r.score>=80,nx=l&&LESSONS[LESSONS.indexOf(l)+1];
+ const bySk={};quiz.queue.slice(0,quiz.total).forEach(q=>{const k=q.skill;bySk[k]=bySk[k]||[0,0];bySk[k][1]++;if(!quiz.wrong.includes(q))bySk[k][0]++});
+ return`<h1>الدرجة: ${r.score}٪</h1><div class="card"><p>صحيحة من أول محاولة: ${quiz.first} · خاطئة: ${quiz.wrong.length}</p>
+ <div class="tw"><table>${Object.entries(bySk).map(([k,v])=>`<tr><td>${SKILL[k]}</td><td>${v[0]} من ${v[1]}</td></tr>`).join('')}</table></div>
+ ${l?`<p>${ok?'أحسنت، اجتزت الدرس. راجعه غداً ليثبت.':passed(l.id)?'درجتك هنا أقل من 80٪، والدرس ما زال مجتازاً من قبل.':'تحتاج 80٪ لفتح الدرس التالي. راجع ثم أعد المحاولة، فلا توجد عقوبة.'}</p>`:''}</div>
+ ${quiz.wrong.length?`<h2>أخطاؤك (أضيفت إلى المراجعة)</h2>${quiz.wrong.map(q=>`<div class="card"><div>الصحيح: <b>${tx(q.type==='match'?'A a':q.a)}</b></div><div class="mut" dir="auto">${esc(q.why||'راجع شكلي الحرف الكبير والصغير.')}</div></div>`).join('')}`:''}
+ <div class="row">${l?`<button data-a="relearn" data-id="${l.id}">راجع الدرس</button><button data-a="quiz" data-id="${l.id}">أعد الاختبار</button>`:''}${l&&passed(l.id)&&nx&&unlocked(nx)?`<button class="pri" data-a="lesson" data-id="${nx.id}">الدرس التالي: ${esc(nx.title)}</button>`:''}<button data-a="go" data-v="home">الرئيسية</button></div>`},
+review(){const d=dueKeys(),all=Object.keys(S.srs),w=all.filter(weak);const next=all.map(k=>S.srs[k].due).filter(t=>t>Date.now()).sort((a,b)=>a-b)[0];
+ return`${back()}<h1>المراجعة</h1><div class="card"><p>المستحق الآن: <b>${d.length}</b></p>${d.length?'<button class="pri big" data-a="rev">ابدأ المراجعة (حتى 15)</button>':all.length?`<p>لا شيء مستحق الآن. الموعد القادم: ${new Date(next).toLocaleDateString('ar-IQ')}</p><button data-a="free">تدريب إضافي على الأضعف</button>`:'<p>ستظهر هنا العناصر بعد أول اختبار.</p>'}</div>
+ ${w.length?`<h2>تحتاج تثبيتاً (${w.length})</h2><div class="card tw"><table>${w.slice(0,40).map(k=>rowK(k)).join('')}</table></div>`:''}
+ <p class="mut">كل إجابة صحيحة في موعدها تؤخّر المراجعة: يوم، ثم 2، 4، 8، 16، 32. والخطأ يعيدها إلى الآن.</p>`},
+tests(){const has=s=>LESSONS.some(l=>l.stage===s&&passed(l.id));
+ return`${back()}<h1>الاختبارات</h1><div class="card"><p>اختبار على الدروس المجتازة في كل مرحلة.</p>${STAGES.filter(s=>has(s.id)).map(s=>`<button class="lesson" data-a="stest" data-s="${s.id}"><span>المرحلة ${s.id}: ${esc(s.title)}</span><span>▶</span></button>`).join('')||'<p class="mut">اجتز درساً أولاً.</p>'}<button data-a="placement">اختبار تحديد المستوى</button></div>
+ ${S.tests.length?`<h2>آخر النتائج</h2><div class="card tw"><table>${S.tests.slice(-15).reverse().map(t=>`<tr><td>${esc(t.name)}</td><td>${t.ok}/${t.n}</td><td>${new Date(t.at).toLocaleDateString('ar-IQ')}</td></tr>`).join('')}</table></div>`:''}`},
+stats(){
+ const n=nextLesson(),keys=Object.keys(S.srs),words=keys.filter(k=>k.startsWith('w:')),letters=keys.filter(k=>k.startsWith('l:'));
+ const stDone=STAGES.filter(s=>LESSONS.filter(l=>l.stage===s.id).every(l=>passed(l.id)));
+ const sk={};keys.forEach(k=>Object.entries(S.srs[k].sk).forEach(([a,b])=>{sk[a]=sk[a]||[0,0];sk[a][0]+=b[0];sk[a][1]+=b[1]}));
+ const stg={};keys.forEach(k=>{const x=(ITEMS[k]||QMAP[k]).stage;stg[x]=stg[x]||[0,0];stg[x][0]+=S.srs[k].r;stg[x][1]+=S.srs[k].w});
+ const pct=v=>v[0]+v[1]<5?'<span class="mut">بيانات قليلة</span>':Math.round(v[0]/(v[0]+v[1])*100)+'٪';
+ const chips=a=>a.length?a.map(k=>`<span class="en">${esc(ITEMS[k].en)}</span>`).join(' · '):'<span class="mut">لا شيء بعد</span>';
+ const tbl=h=>`<div class="card tw"><table>${h}</table></div>`;
+ return`${back()}<h1>تقدّمك</h1><div class="grid">${[['المستوى الحالي',n?n.stage:'✓'],['دروس اجتزتها',LESSONS.filter(l=>passed(l.id)&&!S.done[l.id].placed).length+'/'+LESSONS.length],['جلسات',S.sessions.length],['وقت التعلم',dur(S.time)],['حروف متقنة',letters.filter(mastered).length+'/26'],['كلمات متقنة',words.filter(mastered).length]].map(([a,b])=>`<div class="card stat"><b>${b}</b>${a}</div>`).join('')}</div>
+ <p class="mut">«متقن» تعني: نجحت بالعنصر في مواعيد مراجعة متباعدة وبأكثر من نوع تمرين.</p>
+ <h2>المراحل</h2><div class="card">${Object.values(S.done).some(d=>d.placed)?`<p class="mut">دروس تخطّيتها بالتقييم (لا تُعدّ إتقاناً): ${Object.values(S.done).filter(d=>d.placed).length}</p>`:""}<p>المكتملة: ${stDone.map(s=>s.id).join('، ')||'لا شيء بعد'}</p><p>المتبقية: ${STAGES.filter(s=>!stDone.includes(s)).map(s=>s.id).join('، ')}</p></div>
+ <h2>المهارات</h2>${Object.keys(sk).length?tbl(Object.entries(sk).map(([k,v])=>`<tr><td>${SKILL[k]}</td><td>${pct(v)}</td><td class="mut">${v[0]+v[1]} إجابة</td></tr>`).join('')):'<p class="mut">لا توجد نتائج بعد.</p>'}
+ ${Object.keys(stg).length?`<h2>الدقة حسب الموضوع</h2>${tbl(Object.entries(stg).map(([s,v])=>`<tr><td>${esc(STAGES[s].title)}</td><td>${pct(v)}</td></tr>`).join(''))}`:''}
+ <h2>كلمات تعرفها</h2><div class="card">${chips(words.filter(mastered))}</div>
+ <h2>تحتاج مراجعة</h2><div class="card">${chips(keys.filter(k=>ITEMS[k]&&weak(k)))}</div>
+ <h2>سجل الجلسات</h2>${S.sessions.length?tbl(S.sessions.slice(-20).reverse().map(s=>`<tr><td>${new Date(s.at).toLocaleDateString('ar-IQ')}</td><td>${dur(s.sec)}</td><td>${s.ok}/${s.n}</td></tr>`).join('')):'<p class="mut">لا جلسات بعد.</p>'}`},
+settings(){const t=S.set,sel=(id,opts,v)=>`<select id="${id}" data-set="${id}">${opts.map(([a,b])=>`<option value="${esc(a)}" ${String(a)===String(v)?'selected':''}>${esc(b)}</option>`).join('')}</select>`;
+ return`${back()}<h1>الإعدادات</h1><div class="card"><h3>المظهر</h3>
+ <label class="set">الوضع${sel('theme',[['auto','حسب الجهاز'],['light','فاتح'],['dark','داكن']],t.theme)}</label>
+ <label class="set">حجم الخط${sel('font',[[90,'صغير'],[100,'عادي'],[115,'كبير'],[130,'أكبر']],t.font)}</label>
+ <label class="set">النطق التقريبي بالعربية${sel('translit',[['1','ظاهر'],['0','مخفي']],t.translit?'1':'0')}</label></div>
+ <div class="card"><h3>الدروس</h3><label class="set">كلمات في كل خطوة${sel('per',[[0,'3 (عادي)'],[2,'2'],[4,'4']],t.per)}</label>
+ <label class="set">فتح كل الدروس (تخطّي الترتيب)${sel('unlock',[['0','لا'],['1','نعم']],t.unlock?'1':'0')}</label></div>
+ <div class="card"><h3>الصوت</h3><label class="set">اللهجة${sel('accent',[['en-US','أمريكي'],['en-GB','بريطاني']],t.accent)}</label>
+ <label class="set">الصوت${sel('voice',[['','تلقائي'],...voices.map(v=>[v.voiceURI,v.name+(v.localService?'':' (يحتاج إنترنت)')])],t.voice)}</label>
+ <label class="set">السرعة${sel('rate',[[.6,'بطيء'],[.8,'متوسط'],[1,'عادي']],t.rate)}</label>
+ <button data-a="say" data-t="Hello. This is an English voice.">🔊 جرّب الصوت</button>
+ <p class="mut">${!TTS?'متصفحك لا يدعم النطق.':voices.length?'':'لم يظهر صوت إنجليزي بعد. اضغط «جرّب الصوت»، وإن لم تسمع شيئاً ثبّت صوتاً إنجليزياً من إعدادات الجهاز.'} النطق يأتي من جهازك ومتصفحك. عمله دون إنترنت يعتمد على الأصوات المثبتة. وأصوات الحروف المفردة لا ينطقها الجهاز بدقة، لذلك تسمعها داخل كلمات.</p></div>
+ <div class="card"><h3>النسخ الاحتياطي</h3><p class="mut">تقدمك محفوظ في هذا المتصفح فقط. مسح بيانات المتصفح يمسحه، فصدّر نسخة بين فترة وأخرى.</p>
+ <div class="row"><button class="pri" data-a="export">تصدير ملف JSON</button><button data-a="copy">نسخ النص</button></div><textarea id="bk" dir="ltr" hidden readonly aria-label="نص النسخة"></textarea>
+ <h3>الاستيراد</h3><label class="set">من ملف<input type="file" id="file" accept=".json,application/json,text/plain"></label><textarea id="paste" dir="ltr" placeholder="أو الصق نص النسخة هنا" aria-label="لصق النسخة"></textarea><button data-a="import">استيراد النص الملصق</button></div>
+ <div class="card"><h3>إعادة الضبط</h3><button class="danger" data-a="reset">مسح كل التقدم</button></div>`}
+};
+function rowK(k){const i=ITEMS[k],q=QMAP[k],r=S.srs[k];return`<tr><td>${i?`<span class="en">${esc(i.en)}</span>`:`<span dir="auto">${esc(q.q.replace(/\[say:\w+\]/,'استماع:'))}</span>`}</td><td>${i?esc(i.ar||i.arn):''}</td><td class="mut">أخطاء ${r.w}</td></tr>`}
+function card(i,l){
+ const tr=S.set.translit;
+ if(i.t==='l')return`<div class="card"><div class="paper">${i.en} ${i.low}</div>
+ <div class="row between"><div><h3>اسم الحرف: <span class="en">${esc(i.name)}</span>${tr?` «${i.arn}»`:''}</h3><div class="mut">الكبير ${i.en} · الصغير ${i.low}</div></div><button class="pri" data-a="say" data-t="${LETTERSAY[i.en]}">🔊 الاسم</button></div>
+ <p><b>صوته:</b> ${esc(i.snd)}</p>${i.note?`<p class="mut">${esc(i.note)}</p>`:''}<p class="mut">اسمع الصوت في أول الكلمة (أو آخرها في X):</p>
+ ${i.ex.map(e=>`<div class="ex"><span class="pic" aria-hidden="true">${e.pic}</span><div><span class="en">${e.w}</span> — ${e.ar}${tr?`<div class="mut">${e.pr}</div>`:''}</div>${sbtn(e.w)}</div>`).join('')}
+ <h3>اكتبه بإصبعك</h3><canvas data-l="${i.en} ${i.low}" aria-label="لوحة كتابة الحرف"></canvas><button data-a="clear">امسح اللوحة</button></div>`;
+ if(i.t==='s')return`<div class="card"><div class="sent">${esc(i.en)}</div><div class="row">${sbtn(sayOf(i))}<button data-a="slow" data-t="${esc(sayOf(i))}">🐢</button></div>${l.translate?`<details><summary>حاول أولاً، ثم اعرض الترجمة</summary><p>${esc(i.ar)}</p></details>`:`<p>${esc(i.ar)}</p>`}${tr&&i.pr?`<p class="mut">${esc(i.pr)}</p>`:''}</div>`;
+ return`<div class="card"><div class="paper word">${esc(i.en)}</div><div class="row between"><div><h3>${esc(i.ar)}</h3>${tr?`<div class="mut">${esc(i.pr)}</div>`:''}</div><div class="row">${sbtn(i.en)}<button data-a="slow" data-t="${esc(i.en)}" aria-label="استمع ببطء">🐢</button></div></div>
+ ${i.ex?`<div class="ex"><div><div class="sent">${esc(i.ex)}</div><div>${esc(i.exar)}</div></div>${sbtn(i.ex,'استمع للمثال')}</div>`:''}
+ ${l.blend&&/^[a-z]{3,4}$/.test(i.en)?`<p class="mut">اقرأ الحروف بأصواتها من اليسار: <span class="en">${i.en.split('').join(' · ')}</span></p>`:''}</div>`}
+function fb(q,an){const last=quiz.i===quiz.queue.length-1;
+ return`<div class="fb ${an.ok?'ok':'no'}" role="status"><b>${an.ok?'صحيح ✓':'ليس صحيحاً ✗'}</b>${!an.ok&&q.a?`<div>الإجابة: ${tx(q.a)}</div>`:''}${q.why?`<div dir="auto">${esc(q.why)}</div>`:''}</div><button class="pri big" data-a="next">${last?'اعرض النتيجة':'التالي'}</button>`}
+function initCanvas(){document.querySelectorAll('canvas').forEach(c=>{
+ const dpr=devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;c.width=w*dpr;c.height=h*dpr;const x=c.getContext('2d');x.scale(dpr,dpr);
+ const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+ c._draw=()=>{x.clearRect(0,0,w,h);[[.15,'--rule'],[.4,'--rule'],[.72,'--base'],[.92,'--rule']].forEach(([y,v])=>{x.fillStyle=css(v);x.fillRect(0,h*y,w,y===.72?2:1)});
+  x.globalAlpha=.22;x.fillStyle=css('--fg');x.textAlign='center';x.textBaseline='alphabetic';x.direction='ltr';x.font=`${h*.75}px Andika, Verdana, sans-serif`;x.fillText(c.dataset.l,w/2,h*.72,w-10);x.globalAlpha=1};
+ c._draw();let down=false;
+ const pos=e=>{const r=c.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]};
+ c.onpointerdown=e=>{down=true;c.setPointerCapture(e.pointerId);x.strokeStyle=css('--ink');x.lineWidth=7;x.lineCap=x.lineJoin='round';x.beginPath();const p=pos(e);x.moveTo(...p);x.lineTo(p[0]+.1,p[1]);x.stroke()};
+ c.onpointermove=e=>{if(down){x.lineTo(...pos(e));x.stroke()}};c.onpointerup=c.onpointercancel=()=>down=false})}
+
+/* ---------- النسخ الاحتياطي ---------- */
+let dl=null;
+if(window.claude?.use)window.claude.use('downloads').then(d=>dl=d).catch(()=>{});
+const backupText=()=>JSON.stringify(Object.assign({},S,{active:null,exportedAt:Date.now()}));
+async function exportFile(){
+ const name=`english-journey-${new Date().toISOString().slice(0,10)}.json`,data=backupText();
+ if(window.claude){if(!dl){showBackup();toast('تنزيل الملف غير متاح هنا. انسخ النص واحفظه.');return}
+  try{await dl.save({filename:name,data});}catch(e){showBackup();toast('لم يُحفظ الملف. تستطيع نسخ النص بدلاً منه.')}return}
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
+function showBackup(){const t=$('#bk');if(!t)return;t.hidden=false;t.value=backupText();t.select()}
+function importText(text){
+ let raw,n;try{raw=JSON.parse(text);n=sanitize(raw)}catch(e){n=null}
+ if(!n){modal('<h2>تعذّر الاستيراد</h2><p>هذا ليس ملف نسخة احتياطية صالحاً من هذا الموقع، أو أنه ناقص. لم يتغير تقدمك.</p>',[['حسناً',null,'pri']]);return}
+ const sum=s=>`${Object.values(s.done).filter(d=>d.passed).length} درساً، ${s.sessions.length} جلسة، ${s.time/60|0} دقيقة`;
+ const when=t=>t?new Date(t).toLocaleString('ar-IQ'):'—';
+ const count=s=>Object.values(s.srs).reduce((a,r)=>a+r.r+r.w,0);
+ const hasNow=count(S)||S.sessions.length||Object.keys(S.done).length;
+ const older=hasNow&&(n.updatedAt<S.updatedAt&&(count(n)!==count(S)||sum(n)!==sum(S))||count(n)<count(S));
+ modal(`<h2>${older?'⚠️ النسخة أقدم أو أقل من تقدمك الحالي':'استيراد النسخة'}</h2><p>الحالي: ${sum(S)}<br><span class="mut">${when(S.updatedAt)}</span></p><p>الملف: ${sum(n)}<br><span class="mut">${when(n.updatedAt)}</span></p><p>${older?'<b>الاستيراد سيمحو تقدماً أحدث.</b>':'سيحل الملف محل التقدم الحالي.'}</p>`,
+ [[older?'استبدل رغم ذلك':'استورد',()=>{S=n;S.active=null;save();toast('تم الاستيراد');go('home')},older?'danger':'pri'],['إلغاء',null,older?'pri':'']])}
+
+/* ---------- التقييم الأولي ---------- */
+const PSTAGES=[1,3,6];
+function placement(){
+ const take=(st,n)=>shuffle(LESSONS.filter(l=>l.stage===st&&!l.reviewOnly).flatMap(l=>l.items)).slice(0,n);
+ const qs=[];
+ take(1,4).forEach((i,n)=>qs.push(Object.assign(qItem(i,kinds(i)[n%kinds(i).length],Object.values(LET)),{pstage:1})));
+ take(3,4).forEach(i=>qs.push(Object.assign(qItem(i,'meaning',take(3,12)),{pstage:3})));
+ take(6,4).forEach(i=>qs.push(Object.assign(qItem(i,'read',take(6,12)),{pstage:6})));
+ quiz=null;startQuiz(qs,{name:'تحديد المستوى',placement:true});quiz.queue.sort((a,b)=>a.pstage-b.pstage);render();autoSay()}
+function reviewQuiz(keys,name){const qs=keys.map(qForKey).filter(Boolean);if(!qs.length){toast('لا توجد عناصر للمراجعة بعد');return}ensureSession();startQuiz(shuffle(qs),{name});autoSay()}
+
+/* ---------- الأحداث ---------- */
+const ACT={
+ go:d=>{if(TTS)speechSynthesis.cancel();go(d.v)},
+ say:d=>speak(d.t),slow:d=>speak(d.t,true),stop:()=>TTS&&speechSynthesis.cancel(),
+ start:()=>go('start'),
+ min:d=>{S.set.minutes=+d.m;save();render()},
+ begin:d=>{if(S.active){S.active.min=S.set.minutes?Math.ceil(S.active.sec/60)+S.set.minutes:0;S.active.rang=false}else ensureSession(S.set.minutes);save();d.to==='review'?ACT.rev():openLesson(d.to)},
+ end:endSession,
+ zero:()=>{S.onboarded=true;save();go('start')},
+ placement,
+ place:d=>{S.onboarded=true;LESSONS.filter(l=>l.stage<+d.s&&!passed(l.id)).forEach(l=>S.done[l.id]={best:0,passed:true,tries:0,at:Date.now(),placed:true});save();go('home')},
+ lesson:d=>openLesson(d.id),
+ relearn:d=>{S.resume[d.id]={step:0};openLesson(d.id)},
+ step:d=>{const r=S.resume[view.id];r.step=Math.max(0,r.step+ +d.d);save();render();scrollTo(0,0)},
+ quiz:d=>{const l=lessonById(d.id);ensureSession();startQuiz(lessonQuiz(l),{name:l.title,lesson:l.id});autoSay()},
+ lrev:d=>reviewQuiz(shuffle(lessonById(d.id).items.map(i=>i.key)).slice(0,10),'مراجعة: '+lessonById(d.id).title),
+ rev:()=>reviewQuiz(dueKeys().slice(0,15),'مراجعة'),
+ free:()=>reviewQuiz(Object.keys(S.srs).sort((a,b)=>S.srs[a].box-S.srs[b].box||S.srs[b].w-S.srs[a].w).slice(0,10),'تدريب إضافي'),
+ stest:d=>{const ls=LESSONS.filter(l=>l.stage===+d.s&&passed(l.id));const qs=[];ls.forEach(l=>{l.qs.forEach(q=>qs.push(qFrom(q)));l.items.forEach(i=>qs.push(qItem(i,pick(kinds(i,l)),l.items)))});ensureSession();startQuiz(shuffle(qs).slice(0,15),{name:'اختبار المرحلة '+d.s});autoSay()},
+ opt:d=>{if(quiz.answered)return;const q=quiz.queue[quiz.i],v=q.opts[+d.n];answer(v===q.a,v)},
+ build:d=>{quiz.built.push(+d.n);render()},unbuild:d=>{quiz.built.splice(+d.n,1);render()},
+ check:()=>{const q=quiz.queue[quiz.i],v=quiz.built.map(n=>q.parts[n]).join(q.sep);answer(v===q.a,v)},
+ giveup:()=>answer(false,''),
+ show:()=>{const v=$('#mytr').value;quiz.shown=true;render();toast(v?'ترجمتك: '+v:'قارن مع النموذج')},
+ self:d=>{quiz.shown=false;answer(d.ok==='1','')},
+ reveal:()=>{$('#reveal').hidden=false},
+ match:d=>{const q=quiz.queue[quiz.i],m=quiz.m;if(quiz.answered)return;
+  if(d.s==='L'){m.sel=d.k;render();return}if(!m.sel){toast('اضغط الحرف الكبير أولاً');return}
+  if(m.sel===d.k){m.done.push(d.k);record('l:'+d.k,!m.miss.has(d.k),'look');quizActivity(!m.miss.has(d.k))}else{m.miss.add(m.sel);toast('حاول مرة أخرى')}
+  m.sel=null;
+  if(m.done.length===q.items.length){const ok=!m.miss.size;quiz.answered={ok};if(!quiz.redo.has(q)){if(ok)quiz.first++;else quiz.wrong.push(q)}[...m.miss].forEach(k=>record('l:'+k,false,'look'));save()}
+  render()},
+ next:()=>{quiz.shown=false;nextQ()},
+ clear:()=>document.querySelectorAll('canvas').forEach(c=>c._draw()),
+ export:exportFile,
+ copy:()=>{showBackup();navigator.clipboard?.writeText(backupText()).then(()=>toast('نُسخ النص. احفظه في ملف أو رسالة لنفسك.'),()=>toast('حدّد النص وانسخه يدوياً'))??toast('حدّد النص وانسخه يدوياً')},
+ import:()=>importText($('#paste').value),
+ reset:()=>modal('<h2>مسح كل التقدم؟</h2><p>ستُحذف الدروس والمراجعات والجلسات. لا يمكن التراجع. اكتب كلمة <b>مسح</b> للتأكيد.</p><input type="text" id="conf" aria-label="تأكيد">',[['نعم امسح',()=>{if($('#conf').value.trim()==='مسح'){const set=S.set;S=fresh();S.set=set;save();toast('تم المسح');go('home')}else toast('لم يُمسح شيء: كلمة التأكيد غير مطابقة')},'danger'],['إلغاء',null,'pri']])
+};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&!b.disabled)ACT[b.dataset.a]?.(b.dataset)});
+document.addEventListener('submit',e=>{e.preventDefault();if(e.target.id==='typef'&&!quiz.answered){const v=$('#typed').value;if(!v.trim())return;answer(norm(v)===norm(quiz.queue[quiz.i].a),v)}});
+document.addEventListener('change',e=>{const t=e.target;
+ if(t.dataset.set){const k=t.dataset.set,v=t.value;S.set[k]=['font','rate','per'].includes(k)?+v:['translit','unlock'].includes(k)?v==='1':v;if(k==='accent')S.set.voice='';save();render()}
+ if(t.id==='file'&&t.files[0]){const f=t.files[0];if(f.size>2e6){toast('الملف كبير جداً');return}f.text().then(importText).catch(()=>toast('تعذّرت قراءة الملف'));t.value=''}});
+/* تغيّر التقدم في تبويب آخر */
+addEventListener('storage',e=>{if(e.key===KEY&&e.newValue){try{const s=sanitize(JSON.parse(e.newValue));if(s&&s.updatedAt>S.updatedAt){S=s;if(view.name!=='quiz')render()}}catch(_){}}});
+S=load();render();
+document.fonts?.ready.then(()=>document.querySelectorAll('canvas').forEach(c=>c._draw?.()));
+
+if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
